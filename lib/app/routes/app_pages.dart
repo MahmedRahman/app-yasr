@@ -13,8 +13,8 @@ import 'package:yasr/app/modules/permissions/views/permissions_edit_view.dart';
 import 'package:yasr/app/modules/permissions/views/permissions_view.dart';
 import 'package:yasr/app/modules/permissions/bindings/permissions_binding.dart';
 
-import 'package:yasr/app/modules/lawyer/views/lawyer_view.dart';
-import 'package:yasr/app/modules/lawyer/bindings/lawyer_binding.dart';
+import 'package:yasr/app/modules/home_lawyer/views/lawyer_view.dart';
+import 'package:yasr/app/modules/home_lawyer/bindings/lawyer_binding.dart';
 import 'package:yasr/app/modules/Debt/views/Debt_view.dart';
 import 'package:yasr/app/modules/Debt/bindings/Debt_binding.dart';
 
@@ -29,8 +29,8 @@ import 'package:yasr/app/modules/AppSettings/views/aboutus_view.dart';
 import 'package:yasr/app/modules/AppSettings/views/app_settings_view.dart';
 import 'package:yasr/app/modules/AppSettings/views/contactus_view.dart';
 import 'package:yasr/app/modules/AppSettings/views/usagepolicy_view.dart';
-import 'package:yasr/app/modules/Client/views/Client_view.dart';
-import 'package:yasr/app/modules/Client/bindings/Client_binding.dart';
+import 'package:yasr/app/modules/home_client/views/Client_view.dart';
+import 'package:yasr/app/modules/home_client/bindings/Client_binding.dart';
 import 'package:yasr/app/modules/Authentication/views/Authentication_view.dart';
 import 'package:yasr/app/modules/Authentication/bindings/Authentication_binding.dart';
 import 'package:yasr/app/modules/Authentication/views/client_signin_view.dart';
@@ -45,8 +45,7 @@ import 'package:yasr/app/modules/Authentication/views/user_type_view.dart';
 import 'package:yasr/app/modules/TechnicalSuppor/bindings/technical_suppor_binding.dart';
 import 'package:yasr/app/modules/TechnicalSuppor/views/technical_suppor_view.dart';
 import 'package:yasr/app/modules/TechnicalSuppor/views/technical_support_create_view.dart';
-import 'package:yasr/app/modules/home/views/home_view.dart';
-import 'package:yasr/app/modules/home/bindings/home_binding.dart';
+
 import 'package:get/get.dart';
 part 'app_routes.dart';
 
@@ -54,11 +53,7 @@ class AppPages {
   static const INITIAL = Routes.SplashView;
 
   static final routes = [
-    GetPage(
-      name: Routes.HOME,
-      page: () => HomeView(),
-      binding: HomeBinding(),
-    ),
+
     GetPage(
       name: Routes.AUTHENTICATION,
       page: () => AuthenticationView(),

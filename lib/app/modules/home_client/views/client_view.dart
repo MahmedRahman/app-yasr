@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yasr/app/modules/Client/controllers/Client_controller.dart';
+import 'package:yasr/app/modules/home_client/controllers/Client_controller.dart';
 import 'package:yasr/app/modules/debt/views/Debt_view.dart';
 import 'package:yasr/app/modules/technicalsuppor/bindings/technical_suppor_binding.dart';
 import 'package:yasr/app/modules/technicalsuppor/controllers/technical_suppor_controller.dart';
