@@ -2,8 +2,8 @@ import 'dart:ui';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yasr/app/modules/TechnicalSuppor/controllers/technical_suppor_controller.dart';
-import 'package:yasr/app/modules/TechnicalSuppor/model/ticketsModel.dart';
+import 'package:yasr/app/modules/technicalsuppor/controllers/technical_suppor_controller.dart';
+import 'package:yasr/app/modules/technicalsuppor/model/ticketsModel.dart';
 import 'package:yasr/app/routes/app_pages.dart';
 import 'package:yasr/app/data/helper/AppTheme.dart';
 
@@ -62,7 +62,7 @@ class TechnicalSupporView extends GetView<TechnicalSupporController> {
                       child: Card(
                         child: ListTile(
                           onTap: () {
-                            Get.toNamed(Routes.ChatView);
+                            Get.toNamed(Routes.TechnicalSupporDetailesView);
                           },
                           title: Text(myTicket.title),
                           subtitle: Text('تم الحل'),

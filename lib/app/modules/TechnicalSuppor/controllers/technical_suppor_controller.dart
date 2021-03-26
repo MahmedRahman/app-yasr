@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:yasr/app/modules/TechnicalSuppor/model/ticketsModel.dart';
-import 'package:yasr/app/modules/TechnicalSuppor/provider/technical_suppor_provider.dart';
+import 'package:yasr/app/modules/technicalsuppor/model/ticketsModel.dart';
+import 'package:yasr/app/modules/technicalsuppor/provider/technical_suppor_provider.dart';
 import 'package:yasr/app/routes/app_pages.dart';
 import 'package:yasr/app/data/helper/AppConstant.dart';
 import 'package:yasr/app/data/helper/AppUtils.dart';

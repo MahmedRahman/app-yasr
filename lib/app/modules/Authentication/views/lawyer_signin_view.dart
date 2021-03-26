@@ -12,6 +12,8 @@ class LawyerSigninView extends GetView<AuthenticationController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.phone.text = "01143653605";
+    controller.idNumber.text = "29302101301678";
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(15),
@@ -25,9 +27,10 @@ class LawyerSigninView extends GetView<AuthenticationController> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: Get.width*.5,
+                    width: Get.width * .5,
                     child: Image.asset('assets/image/logo.png'),
                   ),
+                  Text('تسجيل دخول المحامى'),
                   CustomTextFormFiled(
                     inputController: controller.phone,
                     inputLabel: 'phone'.tr,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yasr/app/modules/Debt/views/debt_view.dart';
-import 'package:yasr/app/modules/TechnicalSuppor/views/technical_suppor_view.dart';
+import 'package:yasr/app/modules/debt/views/Debt_view.dart';
+import 'package:yasr/app/modules/technicalsuppor/views/technical_suppor_view.dart';
 import 'package:yasr/app/modules/lawyer/controllers/lawyer_controller.dart';
 import 'package:yasr/app/routes/app_pages.dart';
 import 'package:yasr/app/services/services.dart';
@@ -28,8 +28,10 @@ class LawyerView extends GetView<LawyerController> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       textDirection: TextDirection.ltr,
                       children: [
+                        /*
                         Text(Get.find<UserServices>().getFullName()),
                         Text('-'),
+                        */
                         Text(Get.find<UserServices>().getPhoneNumber()),
                       ],
                     ),

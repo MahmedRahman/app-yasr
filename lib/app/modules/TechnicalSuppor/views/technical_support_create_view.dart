@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yasr/app/modules/TechnicalSuppor/controllers/technical_suppor_controller.dart';
+import 'package:yasr/app/modules/technicalsuppor/controllers/technical_suppor_controller.dart';
 import 'package:yasr/app/data/helper/AppEnumeration.dart';
 import 'package:yasr/app/data/component/CustemDropdownButton.dart';
 import 'package:yasr/app/data/component/CustomTextFormFiled.dart';

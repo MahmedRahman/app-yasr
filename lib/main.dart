@@ -3,11 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:yasr/app/data/helper/AppConstant.dart';
 import 'package:yasr/app/data/helper/AppTheme.dart';
 import 'package:yasr/app/data/helper/AppTranslation.dart';
 import 'package:yasr/app/services/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'app/modules/network/controllers/network_controller.dart';
+
 import 'app/routes/app_pages.dart';
 
 void main() async {
@@ -32,7 +33,7 @@ void main() async {
       theme: AppTheme().themeData(),
     
       //defaultTransition: Transition.rightToLeft,
-      title: "منصة يسر",
+      title: appName,
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
     ),

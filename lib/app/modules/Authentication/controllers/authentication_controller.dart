@@ -34,8 +34,7 @@ class AuthenticationController extends GetxController {
     termsConditionsStatus = false;
     _authenticationProvider = AuthenticationProvider();
 
-    phone.text = "01090468201";
-    idNumber.text = "29302101301234";
+
     super.onInit();
   }
 

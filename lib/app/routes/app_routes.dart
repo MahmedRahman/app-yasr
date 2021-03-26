@@ -45,9 +45,9 @@ abstract class Routes {
   
   static const CHAT = '/chat';
   static const ORDER = '/order';
+ static const TechnicalSupporDetailesView = '/TechnicalSupporDetailesView';
 
 
 
 
-  static const NETWORK = '/network';
 }

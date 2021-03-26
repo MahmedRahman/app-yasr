@@ -1,4 +1,4 @@
-
+import 'package:yasr/app/modules/TechnicalSuppor/views/technical_suppor_detailes_view.dart';
 import 'package:yasr/app/modules/chat/views/chat_user_view.dart';
 import 'package:yasr/app/modules/order/views/lawyer_order_detail_view.dart';
 import 'package:yasr/app/modules/order/views/order_add_view.dart';
@@ -23,7 +23,6 @@ import 'package:yasr/app/modules/Notifications/bindings/Notifications_binding.da
 import 'package:yasr/app/modules/Notifications/views/Notifications_view.dart';
 import 'package:yasr/app/modules/Notifications/views/notifications_list_view.dart';
 import 'package:yasr/app/modules/Notifications/views/notifications_detailes_view.dart';
-
 
 import 'package:yasr/app/modules/AppSettings/bindings/app_settings_binding.dart';
 import 'package:yasr/app/modules/AppSettings/views/aboutus_view.dart';
@@ -148,17 +147,14 @@ class AppPages {
     GetPage(
       name: Routes.NOTIFICATIONS,
       page: () => NotificationsView(),
-    
     ),
     GetPage(
       name: Routes.NotificationsListView,
       page: () => NotificationsListView(),
-    
     ),
     GetPage(
       name: Routes.NotificationsDetailesView,
       page: () => NotificationsDetailesView(),
-
     ),
     GetPage(
       name: Routes.TechnicalSupporView,
@@ -185,45 +181,40 @@ class AppPages {
       page: () => LawyerOrderDetailView(),
       binding: OrderBinding(),
     ),
-    
     GetPage(
-      name: Routes.PERMISSIONS, 
-      page:()=> PermissionsView(), 
+      name: Routes.PERMISSIONS,
+      page: () => PermissionsView(),
       binding: PermissionsBinding(),
     ),
     GetPage(
-      name: Routes.PermissionsAddView, 
-      page:()=> PermissionsAddView(), 
+      name: Routes.PermissionsAddView,
+      page: () => PermissionsAddView(),
       binding: PermissionsBinding(),
     ),
-      GetPage(
-      name: Routes.PermissionsEditView, 
-      page:()=> PermissionsEditView(), 
+    GetPage(
+      name: Routes.PermissionsEditView,
+      page: () => PermissionsEditView(),
       binding: PermissionsBinding(),
     ),
-
-    
-
-
     GetPage(
       name: Routes.ChatView,
       page: () => ChatView(),
       binding: ChatBinding(),
     ),
-
-   GetPage(
+    GetPage(
       name: Routes.ChatUserView,
       page: () => ChatUserView(),
       binding: ChatBinding(),
     ),
-
-
-    
     GetPage(
-      name: Routes.ORDER, 
-      page:()=> OrderView(), 
+      name: Routes.ORDER,
+      page: () => OrderView(),
       binding: OrderBinding(),
     ),
-
+    GetPage(
+      name: Routes.TechnicalSupporDetailesView,
+      page: () => TechnicalSupporDetailesView(),
+      binding: OrderBinding(),
+    ),
   ];
 }

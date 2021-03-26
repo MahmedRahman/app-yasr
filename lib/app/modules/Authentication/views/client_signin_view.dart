@@ -10,6 +10,9 @@ class ClientSigninView extends GetView<AuthenticationController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.phone.text="01090468201";
+    controller.idNumber.text="29302101301234";
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(15),
@@ -27,7 +30,7 @@ class ClientSigninView extends GetView<AuthenticationController> {
                     child: Image.asset(
                       'assets/image/logo.png',
                     ),
-                  ),
+                  ),Text('تسجيل دخول العميل'),
                   SizedBox(
                     height: 10,
                   ),

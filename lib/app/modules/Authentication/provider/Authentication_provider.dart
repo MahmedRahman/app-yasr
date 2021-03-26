@@ -11,7 +11,7 @@ class AuthenticationProvider extends GetConnect {
       'key': apikey,
       'phone': phone,
       'id_number': idNumber,
-      'client_type': '1',
+      'client_type': '0',
       'firebase_token': '',
     });
 
@@ -98,7 +98,7 @@ class AuthenticationProvider extends GetConnect {
       'key': apikey,
       'phone': phone,
       'id_number': idNumber,
-      'client_type': '0',
+      'client_type': '1',
       'firebase_token': '',
     });
 
