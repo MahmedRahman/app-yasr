@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:yasr/app/modules/Notifications/controllers/notifications_controller.dart';
 import 'package:yasr/app/modules/Notifications/model/notifications_model.dart';
 import 'package:yasr/app/routes/app_pages.dart';
-import 'package:yasr/app/utils/AppTheme.dart';
+import 'package:yasr/app/data/helper/AppTheme.dart';
 
 class NotificationsListView extends GetView<NotificationsController> {
   

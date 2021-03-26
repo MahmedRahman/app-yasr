@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yasr/app/utils/AppTheme.dart';
+import 'package:yasr/app/data/helper/AppTheme.dart';
+
 
 class ContactusView extends GetView {
   @override

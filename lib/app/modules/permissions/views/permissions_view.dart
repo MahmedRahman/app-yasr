@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yasr/app/modules/permissions/controllers/permissions_controller.dart';
 import 'package:yasr/app/routes/app_pages.dart';
-import 'package:yasr/app/utils/AppTheme.dart';
+import 'package:yasr/app/data/helper/AppTheme.dart';
 
 class PermissionsView extends GetView<PermissionsController> {
   @override

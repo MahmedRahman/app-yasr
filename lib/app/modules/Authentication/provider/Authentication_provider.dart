@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:yasr/app/utils/AppConstant.dart';
+import 'package:yasr/app/data/helper/AppConstant.dart';
 
 class AuthenticationProvider extends GetConnect {
   Future signinClient({

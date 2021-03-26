@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yasr/app/modules/chat/Model/chatMessageModel.dart';
 import 'package:yasr/app/modules/chat/controllers/chat_controller.dart';
-import 'package:yasr/app/utils/AppTheme.dart';
+import 'package:yasr/app/data/helper/AppTheme.dart';
 
 class ChatView extends GetView<ChatController> {
  

@@ -1,8 +1,8 @@
 //import 'package:custom_switch/custom_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yasr/app/utils/AppTheme.dart';
-import 'package:yasr/app/widget/CustomTextFormFiled.dart';
+import 'package:yasr/app/data/helper/AppTheme.dart';
+import 'package:yasr/app/data/component/CustomTextFormFiled.dart';
 
 class PermissionsAddView extends GetView {
   @override

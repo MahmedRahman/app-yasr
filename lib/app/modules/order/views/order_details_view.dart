@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yasr/app/modules/order/controllers/order_controller.dart';
 import 'package:yasr/app/routes/app_pages.dart';
-import 'package:yasr/app/utils/AppTheme.dart';
-import 'package:yasr/app/widget/CustomCheckBox.dart';
+import 'package:yasr/app/data/helper/AppTheme.dart';
+import 'package:yasr/app/data/component/CustomCheckBox.dart';
 
 class OrderDetailsView extends GetView<OrderController> {
   @override

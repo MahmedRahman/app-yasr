@@ -8,8 +8,8 @@ import 'package:yasr/app/modules/Authentication/model/smsSendCodeModel.dart';
 import 'package:yasr/app/modules/Authentication/provider/Authentication_provider.dart';
 import 'package:yasr/app/routes/app_pages.dart';
 import 'package:yasr/app/services/services.dart';
-import 'package:yasr/app/utils/AppConstant.dart';
-import 'package:yasr/app/utils/AppUtils.dart';
+import 'package:yasr/app/data/helper/AppConstant.dart';
+import 'package:yasr/app/data/helper/AppUtils.dart';
 
 class AuthenticationController extends GetxController {
   var autovalidateMode = AutovalidateMode.disabled.obs;

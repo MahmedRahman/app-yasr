@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:yasr/app/services/services.dart';
-import 'package:yasr/app/utils/AppConstant.dart';
+import 'package:yasr/app/data/helper/AppConstant.dart';
 
 class OrderProvider extends GetConnect {
   String token_id = Get.find<UserServices>().getUserToken();

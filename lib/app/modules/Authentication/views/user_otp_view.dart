@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yasr/app/modules/Authentication/controllers/authentication_controller.dart';
 import 'package:yasr/app/routes/app_pages.dart';
-import 'package:yasr/app/utils/AppUtils.dart';
-import 'package:yasr/app/utils/AppValidation.dart';
-import 'package:yasr/app/widget/CustomTextFormFiled.dart';
+import 'package:yasr/app/data/helper/AppUtils.dart';
+import 'package:yasr/app/data/helper/AppValidation.dart';
+import 'package:yasr/app/data/component/CustomTextFormFiled.dart';
 
 class UserOtpView extends GetView<AuthenticationController> {
   final _formKey = GlobalKey<FormState>();

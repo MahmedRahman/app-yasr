@@ -5,9 +5,9 @@ import 'package:yasr/app/modules/TechnicalSuppor/views/technical_suppor_view.dar
 import 'package:yasr/app/modules/lawyer/controllers/lawyer_controller.dart';
 import 'package:yasr/app/routes/app_pages.dart';
 import 'package:yasr/app/services/services.dart';
-import 'package:yasr/app/utils/AppEnumeration.dart';
-import 'package:yasr/app/utils/AppTheme.dart';
-import 'package:yasr/app/widget/CustemDropdownButton.dart';
+import 'package:yasr/app/data/helper/AppEnumeration.dart';
+import 'package:yasr/app/data/helper/AppTheme.dart';
+import 'package:yasr/app/data/component/CustemDropdownButton.dart';
 
 class LawyerView extends GetView<LawyerController> {
   @override

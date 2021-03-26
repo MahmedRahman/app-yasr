@@ -4,8 +4,8 @@ import 'package:yasr/app/modules/order/model/order_detailes_model.dart';
 import 'package:yasr/app/modules/order/model/order_model.dart';
 import 'package:yasr/app/modules/order/provider/order_provider.dart';
 import 'package:yasr/app/routes/app_pages.dart';
-import 'package:yasr/app/utils/AppConstant.dart';
-import 'package:yasr/app/utils/AppUtils.dart';
+import 'package:yasr/app/data/helper/AppConstant.dart';
+import 'package:yasr/app/data/helper/AppUtils.dart';
 
 class OrderController extends GetxController {
   //TODO: Implement OrderController

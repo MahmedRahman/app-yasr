@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:yasr/app/services/services.dart';
-import 'package:yasr/app/utils/AppConstant.dart';
+import 'package:yasr/app/data/helper/AppConstant.dart';
 
 class TechnicalSupporProvider extends GetConnect {
 

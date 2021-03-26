@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yasr/app/modules/TechnicalSuppor/controllers/technical_suppor_controller.dart';
-import 'package:yasr/app/utils/AppEnumeration.dart';
-import 'package:yasr/app/widget/CustemDropdownButton.dart';
-import 'package:yasr/app/widget/CustomTextFormFiled.dart';
+import 'package:yasr/app/data/helper/AppEnumeration.dart';
+import 'package:yasr/app/data/component/CustemDropdownButton.dart';
+import 'package:yasr/app/data/component/CustomTextFormFiled.dart';
 
 class TechnicalSupportCreateView extends GetView<TechnicalSupporController> {
   final _formKey = GlobalKey<FormState>();

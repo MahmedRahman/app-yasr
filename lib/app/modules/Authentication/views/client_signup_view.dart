@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yasr/app/modules/Authentication/controllers/authentication_controller.dart';
 import 'package:yasr/app/routes/app_pages.dart';
-import 'package:yasr/app/utils/AppConstant.dart';
-import 'package:yasr/app/utils/AppEnumeration.dart';
-import 'package:yasr/app/utils/AppUtils.dart';
-import 'package:yasr/app/utils/AppValidation.dart';
-import 'package:yasr/app/widget/CustemDropdownButton.dart';
-import 'package:yasr/app/widget/CustomCheckBox.dart';
-import 'package:yasr/app/widget/CustomTextFormFiled.dart';
+import 'package:yasr/app/data/helper/AppConstant.dart';
+import 'package:yasr/app/data/helper/AppEnumeration.dart';
+import 'package:yasr/app/data/helper/AppUtils.dart';
+import 'package:yasr/app/data/helper/AppValidation.dart';
+import 'package:yasr/app/data/component/CustemDropdownButton.dart';
+import 'package:yasr/app/data/component/CustomCheckBox.dart';
+import 'package:yasr/app/data/component/CustomTextFormFiled.dart';
 
 class ClientSignupView extends GetView<AuthenticationController> {
   @override

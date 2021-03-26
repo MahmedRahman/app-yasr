@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yasr/app/utils/AppConstant.dart';
-import 'package:yasr/app/utils/AppUtils.dart';
-import 'package:yasr/app/widget/CustomCheckBox.dart';
+import 'package:yasr/app/data/helper/AppConstant.dart';
+import 'package:yasr/app/data/helper/AppUtils.dart';
+import 'package:yasr/app/data/component/CustomCheckBox.dart';
 
 class PermissionsEditView extends GetView {
   @override

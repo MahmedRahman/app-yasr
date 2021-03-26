@@ -1,5 +1,6 @@
 import 'package:get/get_connect/connect.dart';
-import 'package:yasr/app/utils/AppConstant.dart';
+
+import 'package:yasr/app/data/helper/AppConstant.dart';
 
 class AppSettingsProvider extends GetConnect {
   Future aboutPage() async {

@@ -10,7 +10,7 @@ import 'package:yasr/app/modules/order/controllers/order_controller.dart';
 import 'package:yasr/app/modules/order/model/order_model.dart';
 import 'package:yasr/app/routes/app_pages.dart';
 import 'package:yasr/app/services/services.dart';
-import 'package:yasr/app/utils/AppTheme.dart';
+import 'package:yasr/app/data/helper/AppTheme.dart';
 
 class ClientView extends GetView<ClientController> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();

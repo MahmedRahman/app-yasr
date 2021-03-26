@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yasr/app/modules/Debt/controllers/Debt_controller.dart';
-import 'package:yasr/app/utils/AppTheme.dart';
-import 'package:yasr/app/utils/AppUtils.dart';
-import 'package:yasr/app/widget/CustomTextFormFiled.dart';
+import 'package:yasr/app/data/helper/AppTheme.dart';
+import 'package:yasr/app/data/helper/AppUtils.dart';
+import 'package:yasr/app/data/component/CustomTextFormFiled.dart';
 
 class DebtView extends GetView<DebtController> {
   @override
