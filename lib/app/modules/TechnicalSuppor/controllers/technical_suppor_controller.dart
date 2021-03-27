@@ -59,9 +59,9 @@ class TechnicalSupporController extends GetxController {
     });
   }
 
-  getTickets() {
+ Future getTickets() async {
     print('TechnicalSuppor Start Get Ticket');
-    TechnicalSupporProvider().getTickets().then((value) {
+   await TechnicalSupporProvider().getTickets().then((value) {
       final ticketsModel = ticketsModelFromJson(value);
 myTickets.clear();
       myTickets.addAll(ticketsModel.result.myTickets);

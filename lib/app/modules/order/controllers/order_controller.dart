@@ -19,8 +19,12 @@ class OrderController extends GetxController {
 
   var requesteDetail = new RequesteDetail().obs;
 
-  getClientOrderList() async {
-    await OrderProvider().getClientOrderList().then((value) {
+  getClientOrderList({@required int requestid}) async {
+    await OrderProvider(
+      
+    ).getClientOrderList(
+      requestType: requestid
+    ).then((value) {
       print(value);
 
       final requestedModel = requestedModelFromJson(value);

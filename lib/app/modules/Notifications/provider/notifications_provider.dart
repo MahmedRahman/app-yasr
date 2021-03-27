@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:get/get_connect/connect.dart';
-import 'package:yasr/app/services/services.dart';
+import 'package:yasr/app/services/auth.dart';
 import 'package:yasr/app/data/helper/AppConstant.dart';
 
 class NotifactionProvider extends GetConnect {

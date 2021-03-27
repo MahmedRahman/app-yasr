@@ -1,13 +1,17 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:yasr/app/services/services.dart';
+import 'package:yasr/app/services/auth.dart';
 import 'package:yasr/app/data/helper/AppConstant.dart';
 
 class OrderProvider extends GetConnect {
   String token_id = Get.find<UserServices>().getUserToken();
 
-  Future<String> getClientOrderList() async {
-    final data =
-        FormData({'key': apikey, 'token_id': token_id, 'key_type': '0'});
+  Future<String> getClientOrderList({@required int requestType}) async {
+    final data = FormData({
+      'key': apikey,
+      'token_id': token_id,
+      'key_type': requestType,
+    });
 
     Response response = await post('$siteUrl/user_api/get_home', data);
 

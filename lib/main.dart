@@ -6,9 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:yasr/app/data/helper/AppConstant.dart';
 import 'package:yasr/app/data/helper/AppTheme.dart';
 import 'package:yasr/app/data/helper/AppTranslation.dart';
-import 'package:yasr/app/services/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-
+import 'package:yasr/app/services/auth.dart';
 import 'app/routes/app_pages.dart';
 
 void main() async {
@@ -20,19 +18,7 @@ void main() async {
   runApp(
     GetMaterialApp(
       translations: AppTranslation(),
-      locale: Locale('ar', 'EG'),
-      fallbackLocale: Locale('ar', 'EG'),
-      localizationsDelegates: [
-        GlobalCupertinoLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: [
-        Locale("ar", "EG"), // OR Locale('ar', 'AE') OR Other RTL locales
-      ],
       theme: AppTheme().themeData(),
-    
-      //defaultTransition: Transition.rightToLeft,
       title: appName,
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,

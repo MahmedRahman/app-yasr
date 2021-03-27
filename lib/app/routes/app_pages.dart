@@ -1,5 +1,8 @@
+import 'package:yasr/app/modules/entry_point/views/entry_point_view.dart';
+import 'package:yasr/app/modules/entry_point/bindings/entry_point_binding.dart';
 import 'package:yasr/app/modules/TechnicalSuppor/views/technical_suppor_detailes_view.dart';
 import 'package:yasr/app/modules/chat/views/chat_user_view.dart';
+import 'package:yasr/app/modules/entry_point/views/splash_view.dart';
 import 'package:yasr/app/modules/order/views/lawyer_order_detail_view.dart';
 import 'package:yasr/app/modules/order/views/order_add_view.dart';
 import 'package:yasr/app/modules/order/views/order_confarm_view.dart';
@@ -37,7 +40,6 @@ import 'package:yasr/app/modules/Authentication/views/client_signin_view.dart';
 import 'package:yasr/app/modules/Authentication/views/client_signup_view.dart';
 import 'package:yasr/app/modules/Authentication/views/lawyer_signin_view.dart';
 import 'package:yasr/app/modules/Authentication/views/lawyer_signup_view.dart';
-import 'package:yasr/app/modules/Authentication/views/splash_view.dart';
 import 'package:yasr/app/modules/Authentication/views/user_activate_view.dart';
 import 'package:yasr/app/modules/Authentication/views/user_otp_view.dart';
 import 'package:yasr/app/modules/Authentication/views/user_type_view.dart';
@@ -50,7 +52,7 @@ import 'package:get/get.dart';
 part 'app_routes.dart';
 
 class AppPages {
-  static const INITIAL = Routes.SplashView;
+  static const INITIAL = Routes.ENTRY_POINT;
 
   static final routes = [
 
@@ -210,6 +212,11 @@ class AppPages {
       name: Routes.TechnicalSupporDetailesView,
       page: () => TechnicalSupporDetailesView(),
       binding: OrderBinding(),
+    ),
+    GetPage(
+      name: Routes.ENTRY_POINT, 
+      page:()=> EntryPointView(), 
+      binding: EntryPointBinding(),
     ),
   ];
 }

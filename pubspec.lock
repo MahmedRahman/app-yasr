@@ -160,11 +160,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.10.5"
-  flutter_localizations:
-    dependency: "direct dev"
-    description: flutter
-    source: sdk
-    version: "0.0.0"
   flutter_svg:
     dependency: transitive
     description:
@@ -211,7 +206,7 @@ packages:
     source: hosted
     version: "1.0.2"
   intl:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: intl
       url: "https://pub.dartlang.org"
@@ -237,7 +232,7 @@ packages:
       name: logging
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "1.0.1"
   lottie:
     dependency: "direct main"
     description:
@@ -342,7 +337,7 @@ packages:
       name: process
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.1.0"
+    version: "4.2.1"
   quiver:
     dependency: transitive
     description:

@@ -10,8 +10,6 @@ import 'package:yasr/app/data/helper/AppTheme.dart';
 class TechnicalSupporView extends GetView<TechnicalSupporController> {
   @override
   Widget build(BuildContext context) {
-
-    controller.getTickets();
     return Scaffold(
       body: Column(
         children: [
@@ -48,49 +46,60 @@ class TechnicalSupporView extends GetView<TechnicalSupporController> {
               ),
             ),
           ),
-          Obx(
-            () {
-              //  return Text(controller?.myTickets?.length.toString());
-              return Expanded(
-                child: ListView.builder(
-                  itemCount: controller?.myTickets?.length ?? 0,
-                  itemBuilder: (context, index) {
-                    MyTicket myTicket = controller.myTickets.elementAt(index);
+          FutureBuilder(
+              future: controller.getTickets(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return Obx(
+                    () {
+                      //  return Text(controller?.myTickets?.length.toString());
+                      return Expanded(
+                        child: ListView.builder(
+                          itemCount: controller?.myTickets?.length ?? 0,
+                          itemBuilder: (context, index) {
+                            MyTicket myTicket =
+                                controller.myTickets.elementAt(index);
 
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Card(
-                        child: ListTile(
-                          onTap: () {
-                            Get.toNamed(Routes.TechnicalSupporDetailesView);
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Card(
+                                child: ListTile(
+                                  onTap: () {
+                                    Get.toNamed(
+                                        Routes.TechnicalSupporDetailesView);
+                                  },
+                                  title: Text(myTicket.title),
+                                  subtitle: Text('تم الحل'),
+                                  leading: Container(
+                                    padding: EdgeInsets.all(5),
+                                    child: Text(
+                                      myTicket.type,
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    decoration: BoxDecoration(
+                                        color: AppTheme().colorPrimary),
+                                  ),
+                                  trailing: Text(
+                                    DateFormat("MMMM d")
+                                        .format(myTicket.createdAt)
+                                        .toString(),
+                                    style: TextStyle(
+                                        color: AppTheme().colorPrimary,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                            );
                           },
-                          title: Text(myTicket.title),
-                          subtitle: Text('تم الحل'),
-                          leading: Container(
-                            padding: EdgeInsets.all(5),
-                            child: Text(
-                              myTicket.type,
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            decoration:
-                                BoxDecoration(color: AppTheme().colorPrimary),
-                          ),
-                          trailing: Text(
-                            DateFormat("MMMM d")
-                                .format(myTicket.createdAt)
-                                .toString(),
-                            style: TextStyle(
-                                color: AppTheme().colorPrimary,
-                                fontWeight: FontWeight.bold),
-                          ),
                         ),
-                      ),
-                    );
-                  },
-                ),
-              );
-            },
-          ),
+                      );
+                    },
+                  );
+                }
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }),
           /* Expanded(
             child: Obx(() {
               return ListView.builder(

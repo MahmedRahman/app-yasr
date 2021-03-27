@@ -50,4 +50,5 @@ abstract class Routes {
 
 
 
+  static const ENTRY_POINT = '/entry-point';
 }

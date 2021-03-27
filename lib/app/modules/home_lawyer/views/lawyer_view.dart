@@ -4,7 +4,7 @@ import 'package:yasr/app/modules/debt/views/Debt_view.dart';
 import 'package:yasr/app/modules/technicalsuppor/views/technical_suppor_view.dart';
 import 'package:yasr/app/modules/home_lawyer/controllers/lawyer_controller.dart';
 import 'package:yasr/app/routes/app_pages.dart';
-import 'package:yasr/app/services/services.dart';
+import 'package:yasr/app/services/auth.dart';
 import 'package:yasr/app/data/helper/AppEnumeration.dart';
 import 'package:yasr/app/data/helper/AppTheme.dart';
 import 'package:yasr/app/data/component/CustemDropdownButton.dart';

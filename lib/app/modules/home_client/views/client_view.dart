@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yasr/app/modules/home_client/controllers/Client_controller.dart';
 import 'package:yasr/app/modules/debt/views/Debt_view.dart';
+import 'package:yasr/app/modules/home_client/views/client_home_view.dart';
 import 'package:yasr/app/modules/technicalsuppor/bindings/technical_suppor_binding.dart';
 import 'package:yasr/app/modules/technicalsuppor/controllers/technical_suppor_controller.dart';
 import 'package:yasr/app/modules/technicalsuppor/views/technical_suppor_view.dart';
 import 'package:yasr/app/modules/order/controllers/order_controller.dart';
 import 'package:yasr/app/modules/order/model/order_model.dart';
 import 'package:yasr/app/routes/app_pages.dart';
-import 'package:yasr/app/services/services.dart';
+
 import 'package:yasr/app/data/helper/AppTheme.dart';
+import 'package:yasr/app/services/auth.dart';
 
 class ClientView extends GetView<ClientController> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -112,8 +114,7 @@ class ClientView extends GetView<ClientController> {
                 child: Column(
                   children: [
                     Image.asset('assets/image/logo.png'),
-                    Text('data'),
-                    Text('data'),
+                  
                   ],
                 ),
                 decoration: BoxDecoration(color: AppTheme().colorAccent),
@@ -302,81 +303,21 @@ class HomePageTab extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
-              HomePage(),
-              HomePage(),
-              HomePage(),
-              HomePage(),
+              HomePage(
+                requestid: 0,
+              ),
+              HomePage(
+                requestid: 1,
+              ),
+              HomePage(
+                requestid: 2,
+              ),
+              HomePage(
+                requestid: 3,
+              ),
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  OrderController _orderController = Get.put(OrderController());
-
-  @override
-  Widget build(BuildContext context) {
-    _orderController.getClientOrderList();
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          TextField(
-            textAlign: TextAlign.right,
-            decoration: InputDecoration(
-              contentPadding: EdgeInsets.fromLTRB(20.0, 5.0, 20.0, 5.0),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.black,
-                  style: BorderStyle.solid,
-                  width: 1,
-                ),
-              ),
-              hintText: 'البحث',
-              suffixIcon: Icon(
-                Icons.search,
-                color: Colors.black,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Obx(() {
-            return Expanded(
-              child: ListView.separated(
-                itemCount: _orderController.allRequests.length,
-                itemBuilder: (context, index) {
-                  AllRequest request =
-                      _orderController.allRequests.elementAt(index);
-
-                  return ListTile(
-                    onTap: () {
-                      Get.toNamed(Routes.OrderDetailsView,
-                          arguments: [request.requestedId]);
-                    },
-                    title: Text(request.requestedTitle),
-                    subtitle: Text(request.requestedState),
-                    trailing: Text(request.requestedDate.toString()),
-                    leading: SizedBox(
-                      height: 32,
-                      width: 32,
-                      child: Image.asset('assets/image/order.png'),
-                    ),
-                  );
-                },
-                separatorBuilder: (BuildContext context, int index) {
-                  return Divider(
-                    thickness: 1,
-                  );
-                },
-              ),
-            );
-          })
-        ],
       ),
     );
   }

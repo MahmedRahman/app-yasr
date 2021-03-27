@@ -7,7 +7,7 @@ import 'package:yasr/app/modules/Authentication/model/customerInfoModel.dart';
 import 'package:yasr/app/modules/Authentication/model/smsSendCodeModel.dart';
 import 'package:yasr/app/modules/Authentication/provider/Authentication_provider.dart';
 import 'package:yasr/app/routes/app_pages.dart';
-import 'package:yasr/app/services/services.dart';
+import 'package:yasr/app/services/auth.dart';
 import 'package:yasr/app/data/helper/AppConstant.dart';
 import 'package:yasr/app/data/helper/AppUtils.dart';
 

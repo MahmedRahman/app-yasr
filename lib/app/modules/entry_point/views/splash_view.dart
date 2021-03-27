@@ -4,14 +4,9 @@ import 'package:loading_indicator/loading_indicator.dart';
 import 'package:yasr/app/modules/Authentication/controllers/authentication_controller.dart';
 
 import 'package:yasr/app/routes/app_pages.dart';
-import 'package:yasr/app/services/services.dart';
+import 'package:yasr/app/services/auth.dart';
 
 class SplashView extends StatelessWidget {
-  void onstart() {
-    // new Future.delayed(const Duration(seconds: 4), () {
-
-    // });
-  }
 
   @override
   Widget build(BuildContext context) {
