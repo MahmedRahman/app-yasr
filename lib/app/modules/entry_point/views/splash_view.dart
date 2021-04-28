@@ -6,7 +6,7 @@ import 'package:yasr/app/modules/Authentication/controllers/authentication_contr
 import 'package:yasr/app/routes/app_pages.dart';
 import 'package:yasr/app/services/auth.dart';
 
-class SplashView extends StatelessWidget {
+class SplashView extends GetView {
 
   @override
   Widget build(BuildContext context) {

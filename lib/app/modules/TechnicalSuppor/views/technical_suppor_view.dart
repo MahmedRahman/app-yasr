@@ -60,6 +60,7 @@ class TechnicalSupporView extends GetView<TechnicalSupporController> {
                             MyTicket myTicket =
                                 controller.myTickets.elementAt(index);
 
+
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Card(
