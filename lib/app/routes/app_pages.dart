@@ -17,7 +17,6 @@ import 'package:yasr/app/modules/Authentication/views/user_type_view.dart';
 import 'package:yasr/app/modules/Debt/bindings/Debt_binding.dart';
 import 'package:yasr/app/modules/Debt/views/Debt_view.dart';
 import 'package:yasr/app/modules/Notifications/bindings/Notifications_binding.dart';
-import 'package:yasr/app/modules/Notifications/views/Notifications_view.dart';
 import 'package:yasr/app/modules/Notifications/views/notifications_detailes_view.dart';
 import 'package:yasr/app/modules/Notifications/views/notifications_list_view.dart';
 import 'package:yasr/app/modules/TechnicalSuppor/bindings/technical_suppor_binding.dart';
@@ -139,10 +138,7 @@ class AppPages {
       page: () => UsagepolicyView(),
       binding: AppSettingsBinding(),
     ),
-    GetPage(
-      name: Routes.NOTIFICATIONS,
-      page: () => NotificationsView(),
-    ),
+
     GetPage(
       name: Routes.NotificationsListView,
       page: () => NotificationsListView(),

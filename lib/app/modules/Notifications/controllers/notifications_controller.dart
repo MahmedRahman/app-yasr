@@ -1,29 +1,28 @@
+import 'package:yasr/app/api/response_model.dart';
+import 'package:yasr/app/api/web_serives.dart';
 import 'package:yasr/app/modules/Notifications/model/notifications_model.dart';
 import 'package:get/get.dart';
-import 'package:yasr/app/modules/Notifications/provider/notifications_provider.dart';
 
 class NotificationsController extends GetxController {
-
-
   //TODO: Implement NotificationsController
 
-  List<AllNotification> allNotifications = List<AllNotification>().obs;
+  var allNotifications = Future.value().obs;
 
   @override
   void onInit() {
-    print('Notifications Controller onInit');
     super.onInit();
   }
 
   getNotifaction() async {
-    await NotifactionProvider().getNotifaction().then((value) {
+    ResponsModel responsModel = await WebServices().getNotifaction();
 
-      final notificationsModel = notificationsModelFromJson(value);
-
-      allNotifications.addAll(notificationsModel.result.allNotifications) ;
-
-
-        
-    });
+    if (responsModel.success) {
+      Response response = responsModel.data;
+      final notificationsModel =
+          notificationsModelFromJson(response.bodyString);
+      allNotifications.value =
+          Future.value(notificationsModel.result.allNotifications);
+     
+    }
   }
 }

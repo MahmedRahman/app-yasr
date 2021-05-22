@@ -73,6 +73,15 @@ class LawyerSignupView extends GetView<AuthenticationController> {
                   return AppValidation.checkEmpty(value);
                 },
               ),
+              CustomTextFormFiled(
+                inputController: controller.idNumber,
+                inputLabel: 'كلمة المرور',
+                inputHit: 'كلمة المرور',
+                keyboardType: TextInputType.visiblePassword,
+                onValidator: (value) {
+                  return AppValidation.checkEmpty(value);
+                },
+              ),
               CustomCheckBox(
                 labelCheckBox: 'أوافق على سياسة الاستخدام',
               ),
@@ -88,6 +97,9 @@ class LawyerSignupView extends GetView<AuthenticationController> {
                   }
                 },
                 child: Text('Create an account'.tr),
+              ),
+              SizedBox(
+                height: 15,
               ),
             ],
           ),

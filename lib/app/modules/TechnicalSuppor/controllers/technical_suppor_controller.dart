@@ -16,7 +16,7 @@ class TechnicalSupporController extends GetxController {
   void onInit() {
     print('TechnicalSuppor Init');
     myTickets = List<MyTicket>().obs;
-    
+
     super.onInit();
   }
 
@@ -35,20 +35,16 @@ class TechnicalSupporController extends GetxController {
       content: content.text,
     )
         .then((value) {
-
-
-          print(value);
+      print(value);
 
       AppUtils().showSnackBar(
           title: appName,
           message: value.toString(),
-          onstatusBarClosed:  (){
+          onstatusBarClosed: () {
             title.clear();
             content.clear();
 //getTickets();
             Get.toNamed(Routes.CLIENT, arguments: ["1"]);
-
-
           });
     }, onError: (value) {
       AppUtils().showSnackBar(
@@ -59,11 +55,11 @@ class TechnicalSupporController extends GetxController {
     });
   }
 
- Future getTickets() async {
+  Future getTickets() async {
     print('TechnicalSuppor Start Get Ticket');
-   await TechnicalSupporProvider().getTickets().then((value) {
+    await TechnicalSupporProvider().getTickets().then((value) {
       final ticketsModel = ticketsModelFromJson(value);
-myTickets.clear();
+      myTickets.clear();
       myTickets.addAll(ticketsModel.result.myTickets);
     }, onError: (value) {
       AppUtils().showSnackBar(

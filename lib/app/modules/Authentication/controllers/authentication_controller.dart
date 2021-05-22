@@ -1,21 +1,15 @@
-import 'dart:async';
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yasr/app/api/response_model.dart';
 import 'package:yasr/app/api/web_serives.dart';
-import 'package:yasr/app/modules/Authentication/model/customerInfoModel.dart';
-import 'package:yasr/app/modules/Authentication/model/smsSendCodeModel.dart';
-import 'package:yasr/app/routes/app_pages.dart';
-import 'package:yasr/app/services/auth.dart';
 import 'package:yasr/app/data/helper/AppConstant.dart';
 import 'package:yasr/app/data/helper/AppUtils.dart';
+import 'package:yasr/app/modules/Authentication/model/customerInfoModel.dart';
+import 'package:yasr/app/routes/app_pages.dart';
+import 'package:yasr/app/services/auth.dart';
 
 class AuthenticationController extends GetxController {
-
-
   TextEditingController fullName = TextEditingController();
   TextEditingController phone = TextEditingController();
   TextEditingController address = TextEditingController();
@@ -44,12 +38,15 @@ class AuthenticationController extends GetxController {
         final customerInfoModel =
             customerInfoModelFromJson(response.bodyString);
 
-        Get.find<UserServices>().setUserToken(
+        UserServices userServices = Get.find<UserServices>();
+
+        userServices.setUserToken(
             customerInfoModel.result.customerInfo.token.toString());
-        Get.find<UserServices>().setfullName(
+
+        userServices.setfullName(
             customerInfoModel.result.customerInfo.fullname.toString());
-        Get.find<UserServices>().setUserRole('0');
-        Get.find<UserServices>().setphoneNumber(
+        userServices.setUserRole('0');
+        userServices.setphoneNumber(
             customerInfoModel.result.customerInfo.phone.toString());
 
         AppUtils().showSnackBar(
@@ -157,16 +154,20 @@ class AuthenticationController extends GetxController {
             title: appName,
             message: ' تم تسجيل الدخول ',
             onstatusBarClosed: () {
-              Get.toNamed(Routes.CLIENT);
+              Get.toNamed(Routes.LAWYER);
             });
       } else {
         AppUtils().showSnackBar(
-            title: appName,
-            message: response.body['message'],
-            onstatusBarClosed: () {});
+          title: appName,
+          message: response.body['message'],
+          onstatusBarClosed: () {},
+        );
 
         if (response.body['codenum'] == 405) {
-          Get.toNamed(Routes.UserOtpView, arguments: [phone.text, 0]);
+          Get.toNamed(
+            Routes.UserOtpView,
+            arguments: [phone.text, 0],
+          );
         }
       }
     }

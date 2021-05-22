@@ -243,4 +243,17 @@ class WebServices extends APIManger {
 
     return response;
   }
+
+  getNotifaction() async {
+    ResponsModel response = await repPost(
+        'pages/get_list_notifications',
+        {
+          'key': api_key,
+          'token_id': tokan,
+          'limit': '50',
+          'page_number': '0',
+        },
+        showLoading: true);
+    return response;
+  }
 }

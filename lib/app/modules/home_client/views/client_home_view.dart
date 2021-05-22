@@ -43,36 +43,48 @@ class HomePage extends StatelessWidget {
                     height: 10,
                   ),
                   Obx(() {
-                    return Expanded(
-                      child: ListView.separated(
-                        itemCount: _orderController.allRequests.length,
-                        itemBuilder: (context, index) {
-                          AllRequest request =
-                              _orderController.allRequests.elementAt(index);
+                    return _orderController.allRequests.length == 0
+                        ?  Expanded(
+                          child: Center(
+                              child: Text('لا يوجد طلبات حاليا' ,style: TextStyle(
+                                fontWeight: FontWeight.bold
+                              ),),
+                            ),
+                        )
+                        : Expanded(
+                            child: ListView.separated(
+                              itemCount: _orderController.allRequests.length,
+                              itemBuilder: (context, index) {
+                                AllRequest request = _orderController
+                                    .allRequests
+                                    .elementAt(index);
 
-                          return ListTile(
-                            onTap: () {
-                              Get.toNamed(Routes.OrderDetailsView,arguments: [request.requestedId]);
-                            },
-                            title: Text(request.requestedTitle),
-                            subtitle: Text(request.requestedState),
-                            trailing: Text(DateFormat('yyyy-MM-dd')
-                                .format(request.requestedDate)
-                                .toString()),
-                            leading: SizedBox(
-                              height: 32,
-                              width: 32,
-                              child: Image.asset('assets/image/order.png'),
+                                return ListTile(
+                                  onTap: () {
+                                    Get.toNamed(Routes.OrderDetailsView,
+                                        arguments: [request.requestedId]);
+                                  },
+                                  title: Text(request.requestedTitle),
+                                  subtitle: Text(request.requestedState),
+                                  trailing: Text(DateFormat('yyyy-MM-dd')
+                                      .format(request.requestedDate)
+                                      .toString()),
+                                  leading: SizedBox(
+                                    height: 32,
+                                    width: 32,
+                                    child:
+                                        Image.asset('assets/image/order.png'),
+                                  ),
+                                );
+                              },
+                              separatorBuilder:
+                                  (BuildContext context, int index) {
+                                return Divider(
+                                  thickness: 1,
+                                );
+                              },
                             ),
                           );
-                        },
-                        separatorBuilder: (BuildContext context, int index) {
-                          return Divider(
-                            thickness: 1,
-                          );
-                        },
-                      ),
-                    );
                   })
                 ],
               ),

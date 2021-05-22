@@ -408,35 +408,42 @@ class LawyerHomePage extends StatelessWidget {
                     if (snapshot.hasData) {
                       List<AllRequest> allRequests = snapshot.data;
 
-                      return ListView(
-                        children: List.generate(allRequests.length, (index) {
-                          AllRequest Requests = allRequests.elementAt(index);
-                          return Card(
-                            child: ListTile(
-                              onTap: () {
-                                FocusScope.of(context).unfocus();
+                      return allRequests.length == 0
+                          ? Center(
+                              child: Text('لا توجد طلبات فى الوقت الحالى'),
+                            )
+                          : ListView(
+                              children:
+                                  List.generate(allRequests.length, (index) {
+                                AllRequest Requests =
+                                    allRequests.elementAt(index);
+                                return Card(
+                                  child: ListTile(
+                                    onTap: () {
+                                      FocusScope.of(context).unfocus();
 
-                                Get.toNamed(
-                                  Routes.LawyerOrderDetailView,
-                                  arguments: [Requests.requestedId],
+                                      Get.toNamed(
+                                        Routes.LawyerOrderDetailView,
+                                        arguments: [Requests.requestedId],
+                                      );
+                                    },
+                                    title: Text(Requests.requestedTitle),
+                                    subtitle: Text(Requests.requestedState),
+                                    trailing: Text(
+                                      DateFormat('yyyy-MM-dd')
+                                          .format(Requests.requestedDate)
+                                          .toString(),
+                                    ),
+                                    leading: SizedBox(
+                                      height: 32,
+                                      width: 32,
+                                      child:
+                                          Image.asset('assets/image/order.png'),
+                                    ),
+                                  ),
                                 );
-                              },
-                              title: Text(Requests.requestedTitle),
-                              subtitle: Text(Requests.requestedState),
-                              trailing: Text(
-                                DateFormat('yyyy-MM-dd')
-                                    .format(Requests.requestedDate)
-                                    .toString(),
-                              ),
-                              leading: SizedBox(
-                                height: 32,
-                                width: 32,
-                                child: Image.asset('assets/image/order.png'),
-                              ),
-                            ),
-                          );
-                        }),
-                      );
+                              }),
+                            );
                     }
 
                     return Center(child: CircularProgressIndicator());
