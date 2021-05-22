@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yasr/app/modules/Authentication/controllers/authentication_controller.dart';
-import 'package:yasr/app/routes/app_pages.dart';
-import 'package:yasr/app/data/helper/AppUtils.dart';
 import 'package:yasr/app/data/helper/AppValidation.dart';
 import 'package:yasr/app/data/component/CustomTextFormFiled.dart';
 
 class UserOtpView extends GetView<AuthenticationController> {
   final _formKey = GlobalKey<FormState>();
+
+  String phonenumber = Get.arguments[0];
+  int usertype = Get.arguments[1];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,9 +41,10 @@ class UserOtpView extends GetView<AuthenticationController> {
                 ),
                 RaisedButton(
                   onPressed: () {
+   FocusScope.of(context).unfocus();
                     if (_formKey.currentState.validate()) {
                       // Get.toNamed(Routes.CLIENT);
-                      controller.smsConfirm();
+                      controller.smsConfirm(usertype ,phonenumber);
                     }
                   },
                   child: Text('Account Confirmation'.tr),
@@ -51,10 +54,11 @@ class UserOtpView extends GetView<AuthenticationController> {
                 ),
                 RaisedButton(
                   onPressed: () {
-                   
-                      // Get.toNamed(Routes.CLIENT);
-                      controller.smsSend();
-                    
+                    FocusScope.of(context).unfocus();
+
+                    controller.smsSend(
+                      usertype,phonenumber 
+                    );
                   },
                   child: Text('ارسال كود التفعيل'),
                 )

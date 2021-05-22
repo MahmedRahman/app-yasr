@@ -58,22 +58,20 @@ class ClientSignupView extends GetView<AuthenticationController> {
                     return AppValidation.checkEmpty(value);
                   },
                 ),
-                CustomDropdownButton(
-                  listDropdown:
-                      ListCity.map((e) => e['state_name'].toString()).toList(),
-                  listDropdownValue:
-                      ListCity.map((e) => int.parse(e['state_id'].toString()))
-                          .toList(),
-                  labelDropdownButton: 'City'.tr,
-                  onChanged: (value) {
-                    controller.cityID = value;
-                    print(value);
-                  },
-                ),
+      
                 CustomTextFormFiled(
                   inputController: controller.address,
                   inputLabel: 'Clients address'.tr,
                   inputHit: 'Please enter the address'.tr,
+                  keyboardType: TextInputType.name,
+                  onValidator: (value) {
+                    return AppValidation.checkEmpty(value);
+                  },
+                ),
+                    CustomTextFormFiled(
+                  inputController: controller.password,
+                  inputLabel: 'كلمة السر',
+                  inputHit: 'برجاء كتابة كلمة المرور',
                   keyboardType: TextInputType.name,
                   onValidator: (value) {
                     return AppValidation.checkEmpty(value);
@@ -96,18 +94,18 @@ class ClientSignupView extends GetView<AuthenticationController> {
                       FocusScope.of(context).requestFocus(new FocusNode());
 
                       if (_formKey.currentState.validate()) {
+
                         if (controller.termsConditionsStatus) {
+
                           controller.createClientAccount();
+                          
                         } else {
                           AppUtils().showSnackBar(
                               title: appName,
                               message: 'termsConditionsStatus',
                               onstatusBarClosed: () {});
                         }
-                      } else {
-                        //    controller.autovalidateMode.value =
-                        //      AutovalidateMode.onUserInteraction;
-                      }
+                      } 
                     },
                     child: Text('Create an account'.tr),
                   ),

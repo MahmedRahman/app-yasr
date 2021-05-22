@@ -1,6 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:yasr/app/modules/debt/views/Debt_view.dart';
+import 'package:yasr/app/modules/home_lawyer/model/laywer_home.dart';
 import 'package:yasr/app/modules/technicalsuppor/views/technical_suppor_view.dart';
 import 'package:yasr/app/modules/home_lawyer/controllers/lawyer_controller.dart';
 import 'package:yasr/app/routes/app_pages.dart';
@@ -26,12 +29,8 @@ class LawyerView extends GetView<LawyerController> {
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      textDirection: TextDirection.ltr,
+                      //textDirection: TextDirection.ltr,
                       children: [
-                        /*
-                        Text(Get.find<UserServices>().getFullName()),
-                        Text('-'),
-                        */
                         Text(Get.find<UserServices>().getPhoneNumber()),
                       ],
                     ),
@@ -236,71 +235,131 @@ class LawyerView extends GetView<LawyerController> {
   }
 }
 
+var selectid = 0.obs;
+
 class LawyerHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(100.0),
+    return Column(
+      children: [
+        SizedBox(
+          height: 98,
           child: Container(
-            color: AppTheme().colorSecondary,
-            child: TabBar(
-              labelColor: Colors.black,
-              tabs: [
-                Tab(
-                  icon: SizedBox(
-                    height: 32,
-                    width: 32,
-                    child: Image.asset('assets/image/order1.png'),
+            color: Color(0xff22704A),
+            child: Obx(() {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        selectid.value = 0;
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'assets/image/order1.png',
+                              width: 32,
+                            ),
+                            Text(
+                              'طلبات منتظرة',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                            Divider(
+                              thickness: 2,
+                              color: selectid.value == 0
+                                  ? Colors.white
+                                  : Color(0xff22704A),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
-                  iconMargin: EdgeInsets.all(5),
-                  child: Text(
-                    'طلبات منتظرة',
-                    style: TextStyle(fontSize: 10, color: Colors.white),
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        print('object');
+                        selectid.value = 1;
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'assets/image/order2.png',
+                              width: 32,
+                            ),
+                            Text(
+                              'طلبات حالية',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                            Divider(
+                              thickness: 2,
+                              color: selectid.value == 1
+                                  ? Colors.white
+                                  : Color(0xff22704A),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-                Tab(
-                  icon: SizedBox(
-                    height: 32,
-                    width: 32,
-                    child: Image.asset('assets/image/order2.png'),
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        selectid.value = 2;
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'assets/image/order3.png',
+                              width: 32,
+                            ),
+                            Text(
+                              'طلبات سابقة',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                            Divider(
+                              thickness: 2,
+                              color: selectid.value == 2
+                                  ? Colors.white
+                                  : Color(0xff22704A),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
-                  iconMargin: EdgeInsets.all(5),
-                  child: Text(
-                    'طلبات سابقة',
-                    style: TextStyle(fontSize: 10, color: Colors.white),
-                  ),
-                ),
-                Tab(
-                  icon: SizedBox(
-                    height: 32,
-                    width: 32,
-                    child: Image.asset('assets/image/order3.png'),
-                  ),
-                  iconMargin: EdgeInsets.all(5),
-                  child: Text(
-                    'طلبات حالية',
-                    style: TextStyle(fontSize: 10, color: Colors.white),
-                  ),
-                ),
-              ],
-            ),
+                ],
+              );
+            }),
           ),
         ),
-        body: TabBarView(
-          children: [
-            buildHomePage(),
-            buildHomePage(),
-            buildHomePage(),
-          ],
-        ),
-      ),
+        Expanded(
+          child: Obx(() {
+            return buildHomePage(selectid.value);
+          }),
+        )
+      ],
     );
   }
 
-  Padding buildHomePage() {
+  Widget buildHomePage(int tabid) {
+    LawyerController controller = Get.put(LawyerController());
+    controller.getRequestLawer(tabid);
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -323,42 +382,66 @@ class LawyerHomePage extends StatelessWidget {
               ),
             ),
           ),
+          /* 
           CustomDropdownButton(
-            listDropdown: ListCity.map((e) => e['state_name'].toString()).toList(),
-            listDropdownValue: ListCity.map((e) => int.parse( e['state_id'].toString())).toList(),
-           
+            listDropdown:
+                ListCity.map((e) => e['state_name'].toString()).toList(),
+            listDropdownValue:
+                ListCity.map((e) => int.parse(e['state_id'].toString()))
+                    .toList(),
             labelDropdownButton: '',
           ),
           CustomDropdownButton(
-           listDropdown: ListCity.map((e) => e['state_name'].toString()).toList(),
-            listDropdownValue: ListCity.map((e) => int.parse( e['state_id'].toString())).toList(),
-           
+            listDropdown:
+                ListCity.map((e) => e['state_name'].toString()).toList(),
+            listDropdownValue:
+                ListCity.map((e) => int.parse(e['state_id'].toString()))
+                    .toList(),
             labelDropdownButton: '',
           ),
+        */
           Expanded(
-            child: ListView.separated(
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  onTap: () {
-                    Get.toNamed(Routes.LawyerOrderDetailView);
-                  },
-                  title: Text('اسم الطلب'),
-                  subtitle: Text('مكان الطلب مثلا الرياض'),
-                  trailing: Text('10/10/2020'),
-                  leading: SizedBox(
-                    height: 32,
-                    width: 32,
-                    child: Image.asset('assets/image/order.png'),
-                  ),
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) {
-                return Divider(
-                  thickness: 1,
-                );
-              },
-            ),
+            child: Obx(() {
+              return FutureBuilder(
+                  future: controller.allRequests(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      List<AllRequest> allRequests = snapshot.data;
+
+                      return ListView(
+                        children: List.generate(allRequests.length, (index) {
+                          AllRequest Requests = allRequests.elementAt(index);
+                          return Card(
+                            child: ListTile(
+                              onTap: () {
+                                FocusScope.of(context).unfocus();
+
+                                Get.toNamed(
+                                  Routes.LawyerOrderDetailView,
+                                  arguments: [Requests.requestedId],
+                                );
+                              },
+                              title: Text(Requests.requestedTitle),
+                              subtitle: Text(Requests.requestedState),
+                              trailing: Text(
+                                DateFormat('yyyy-MM-dd')
+                                    .format(Requests.requestedDate)
+                                    .toString(),
+                              ),
+                              leading: SizedBox(
+                                height: 32,
+                                width: 32,
+                                child: Image.asset('assets/image/order.png'),
+                              ),
+                            ),
+                          );
+                        }),
+                      );
+                    }
+
+                    return Center(child: CircularProgressIndicator());
+                  });
+            }),
           )
         ],
       ),

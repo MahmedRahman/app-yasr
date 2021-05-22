@@ -12,8 +12,8 @@ class LawyerSigninView extends GetView<AuthenticationController> {
 
   @override
   Widget build(BuildContext context) {
-    controller.phone.text = "01143653605";
-    controller.idNumber.text = "29302101301678";
+    controller.phone.text = "12345678";
+    controller.password.text = "123456";
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(15),
@@ -37,12 +37,12 @@ class LawyerSigninView extends GetView<AuthenticationController> {
                     inputHit: 'Enter the phone or mobile number'.tr,
                     keyboardType: TextInputType.phone,
                     onValidator: (value) {
-                      return AppValidation.checkMobile(value);
+                      return null; //AppValidation.checkMobile(value);
                     },
                   ),
                   CustomTextFormFiled(
-                    inputController: controller.idNumber,
-                    inputLabel: 'myid'.tr,
+                    inputController: controller.password,
+                    inputLabel: 'كلمة السر',
                     inputHit: 'Enter ID Number'.tr,
                     keyboardType: TextInputType.visiblePassword,
                     onValidator: (value) {
@@ -64,6 +64,7 @@ class LawyerSigninView extends GetView<AuthenticationController> {
                   ),
                   RaisedButton(
                     onPressed: () {
+                      FocusScope.of(context).requestFocus(new FocusNode());
                       if (_formKey.currentState.validate()) {
                         controller.signinLawyer();
                       }

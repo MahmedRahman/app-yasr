@@ -10,8 +10,8 @@ class ClientSigninView extends GetView<AuthenticationController> {
 
   @override
   Widget build(BuildContext context) {
-    controller.phone.text="01090468201";
-    controller.idNumber.text="29302101301234";
+    controller.phone.text="01223846165";
+    controller.password.text="123456";
 
     return Scaffold(
       body: Padding(
@@ -44,10 +44,11 @@ class ClientSigninView extends GetView<AuthenticationController> {
                     },
                   ),
                   CustomTextFormFiled(
-                    inputController: controller.idNumber,
-                    inputLabel: 'myid'.tr,
+                    inputController: controller.password,
+                    inputLabel: 'كلمة السر',
                     inputHit: 'Enter ID Number'.tr,
                     keyboardType: TextInputType.visiblePassword,
+                    
                     onValidator: (value) {
                       return AppValidation.checkEmpty(value);
                     },

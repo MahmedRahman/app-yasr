@@ -50,7 +50,7 @@ class AppTranslation extends Translations {
           'logout' : 'تسجيل الخروج' ,
           'myid' : 'رقم الهوية' ,
           'Enter ID Number' : 'برجاء كتابة رقم الهوية',
-          'Empty String' : 'حقل فارغ'
+          'Empty String' : 'ادخل البيانات الصحيحة'
         }
       };
 }

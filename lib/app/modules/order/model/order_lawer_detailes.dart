@@ -1,15 +1,15 @@
 // To parse this JSON data, do
 //
-//     final requestedDetailesModel = requestedDetailesModelFromJson(jsonString);
+//     final requestedLawerDetailesModel = requestedLawerDetailesModelFromJson(jsonString);
 
 import 'dart:convert';
 
-RequestedDetailesModel requestedDetailesModelFromJson(String str) => RequestedDetailesModel.fromJson(json.decode(str));
+RequestedLawerDetailesModel requestedLawerDetailesModelFromJson(String str) => RequestedLawerDetailesModel.fromJson(json.decode(str));
 
-String requestedDetailesModelToJson(RequestedDetailesModel data) => json.encode(data.toJson());
+String requestedLawerDetailesModelToJson(RequestedLawerDetailesModel data) => json.encode(data.toJson());
 
-class RequestedDetailesModel {
-    RequestedDetailesModel({
+class RequestedLawerDetailesModel {
+    RequestedLawerDetailesModel({
         this.message,
         this.codenum,
         this.status,
@@ -21,7 +21,7 @@ class RequestedDetailesModel {
     bool status;
     Result result;
 
-    factory RequestedDetailesModel.fromJson(Map<String, dynamic> json) => RequestedDetailesModel(
+    factory RequestedLawerDetailesModel.fromJson(Map<String, dynamic> json) => RequestedLawerDetailesModel(
         message: json["message"],
         codenum: json["codenum"],
         status: json["status"],
@@ -39,79 +39,75 @@ class RequestedDetailesModel {
 class Result {
     Result({
         this.requestDetails,
-        this.lawyersList,
+        this.listSound,
+        this.listSlider,
     });
 
     List<RequestDetail> requestDetails;
-    List<LawyersList> lawyersList;
+    List<dynamic> listSound;
+    List<ListSlider> listSlider;
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
         requestDetails: List<RequestDetail>.from(json["request_details"].map((x) => RequestDetail.fromJson(x))),
-        lawyersList: List<LawyersList>.from(json["lawyers_list"].map((x) => LawyersList.fromJson(x))),
+        listSound: List<dynamic>.from(json["list_sound"].map((x) => x)),
+        listSlider: List<ListSlider>.from(json["list_slider"].map((x) => ListSlider.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
         "request_details": List<dynamic>.from(requestDetails.map((x) => x.toJson())),
-        "lawyers_list": List<dynamic>.from(lawyersList.map((x) => x.toJson())),
+        "list_sound": List<dynamic>.from(listSound.map((x) => x)),
+        "list_slider": List<dynamic>.from(listSlider.map((x) => x.toJson())),
     };
 }
 
-class LawyersList {
-    LawyersList({
-        this.idLawyer,
-        this.lawyerName,
-        this.offerDate,
-        this.lawyerOffer,
+class ListSlider {
+    ListSlider({
+        this.imgLink,
+        this.soundId,
     });
 
-    String idLawyer;
-    String lawyerName;
-    DateTime offerDate;
-    String lawyerOffer;
+    String imgLink;
+    String soundId;
 
-    factory LawyersList.fromJson(Map<String, dynamic> json) => LawyersList(
-        idLawyer: json["id_lawyer"],
-        lawyerName: json["lawyer_name"] == null ? null : json["lawyer_name"],
-        offerDate: DateTime.parse(json["offer_date"]),
-        lawyerOffer: json["lawyer_offer"],
+    factory ListSlider.fromJson(Map<String, dynamic> json) => ListSlider(
+        imgLink: json["img_link"],
+        soundId: json["sound_id"],
     );
 
     Map<String, dynamic> toJson() => {
-        "id_lawyer": idLawyer,
-        "lawyer_name": lawyerName == null ? null : lawyerName,
-        "offer_date": "${offerDate.year.toString().padLeft(4, '0')}-${offerDate.month.toString().padLeft(2, '0')}-${offerDate.day.toString().padLeft(2, '0')}",
-        "lawyer_offer": lawyerOffer,
+        "img_link": imgLink,
+        "sound_id": soundId,
     };
 }
 
 class RequestDetail {
     RequestDetail({
         this.requestedTitle,
-        this.clientPhone,
         this.requestedDescription,
         this.requestedDate,
+        this.clientPhone,
         this.requestedId,
     });
 
     String requestedTitle;
-    String clientPhone;
     String requestedDescription;
     DateTime requestedDate;
+    String clientPhone;
     String requestedId;
 
     factory RequestDetail.fromJson(Map<String, dynamic> json) => RequestDetail(
         requestedTitle: json["requested_title"],
-        clientPhone: json["client_phone"],
         requestedDescription: json["requested_description"],
         requestedDate: DateTime.parse(json["requested_date"]),
+        clientPhone: json["client_phone"],
         requestedId: json["requested_id"],
     );
 
     Map<String, dynamic> toJson() => {
         "requested_title": requestedTitle,
-        "client_phone": clientPhone,
         "requested_description": requestedDescription,
         "requested_date": "${requestedDate.year.toString().padLeft(4, '0')}-${requestedDate.month.toString().padLeft(2, '0')}-${requestedDate.day.toString().padLeft(2, '0')}",
+        "client_phone": clientPhone,
         "requested_id": requestedId,
     };
 }

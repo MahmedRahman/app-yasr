@@ -1,15 +1,15 @@
 // To parse this JSON data, do
 //
-//     final requestedDetailesModel = requestedDetailesModelFromJson(jsonString);
+//     final requestedOfferModel = requestedOfferModelFromJson(jsonString);
 
 import 'dart:convert';
 
-RequestedDetailesModel requestedDetailesModelFromJson(String str) => RequestedDetailesModel.fromJson(json.decode(str));
+RequestedOfferModel requestedOfferModelFromJson(String str) => RequestedOfferModel.fromJson(json.decode(str));
 
-String requestedDetailesModelToJson(RequestedDetailesModel data) => json.encode(data.toJson());
+String requestedOfferModelToJson(RequestedOfferModel data) => json.encode(data.toJson());
 
-class RequestedDetailesModel {
-    RequestedDetailesModel({
+class RequestedOfferModel {
+    RequestedOfferModel({
         this.message,
         this.codenum,
         this.status,
@@ -21,7 +21,7 @@ class RequestedDetailesModel {
     bool status;
     Result result;
 
-    factory RequestedDetailesModel.fromJson(Map<String, dynamic> json) => RequestedDetailesModel(
+    factory RequestedOfferModel.fromJson(Map<String, dynamic> json) => RequestedOfferModel(
         message: json["message"],
         codenum: json["codenum"],
         status: json["status"],
@@ -43,16 +43,16 @@ class Result {
     });
 
     List<RequestDetail> requestDetails;
-    List<LawyersList> lawyersList;
+    LawyersList lawyersList;
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
         requestDetails: List<RequestDetail>.from(json["request_details"].map((x) => RequestDetail.fromJson(x))),
-        lawyersList: List<LawyersList>.from(json["lawyers_list"].map((x) => LawyersList.fromJson(x))),
+        lawyersList: LawyersList.fromJson(json["lawyers_list"]),
     );
 
     Map<String, dynamic> toJson() => {
         "request_details": List<dynamic>.from(requestDetails.map((x) => x.toJson())),
-        "lawyers_list": List<dynamic>.from(lawyersList.map((x) => x.toJson())),
+        "lawyers_list": lawyersList.toJson(),
     };
 }
 
@@ -60,25 +60,29 @@ class LawyersList {
     LawyersList({
         this.idLawyer,
         this.lawyerName,
+        this.lawyerPhone,
         this.offerDate,
         this.lawyerOffer,
     });
 
     String idLawyer;
     String lawyerName;
+    String lawyerPhone;
     DateTime offerDate;
     String lawyerOffer;
 
     factory LawyersList.fromJson(Map<String, dynamic> json) => LawyersList(
         idLawyer: json["id_lawyer"],
-        lawyerName: json["lawyer_name"] == null ? null : json["lawyer_name"],
+        lawyerName: json["lawyer_name"],
+        lawyerPhone: json["lawyer_phone"],
         offerDate: DateTime.parse(json["offer_date"]),
         lawyerOffer: json["lawyer_offer"],
     );
 
     Map<String, dynamic> toJson() => {
         "id_lawyer": idLawyer,
-        "lawyer_name": lawyerName == null ? null : lawyerName,
+        "lawyer_name": lawyerName,
+        "lawyer_phone": lawyerPhone,
         "offer_date": "${offerDate.year.toString().padLeft(4, '0')}-${offerDate.month.toString().padLeft(2, '0')}-${offerDate.day.toString().padLeft(2, '0')}",
         "lawyer_offer": lawyerOffer,
     };
@@ -87,21 +91,18 @@ class LawyersList {
 class RequestDetail {
     RequestDetail({
         this.requestedTitle,
-        this.clientPhone,
         this.requestedDescription,
         this.requestedDate,
         this.requestedId,
     });
 
     String requestedTitle;
-    String clientPhone;
     String requestedDescription;
     DateTime requestedDate;
     String requestedId;
 
     factory RequestDetail.fromJson(Map<String, dynamic> json) => RequestDetail(
         requestedTitle: json["requested_title"],
-        clientPhone: json["client_phone"],
         requestedDescription: json["requested_description"],
         requestedDate: DateTime.parse(json["requested_date"]),
         requestedId: json["requested_id"],
@@ -109,7 +110,6 @@ class RequestDetail {
 
     Map<String, dynamic> toJson() => {
         "requested_title": requestedTitle,
-        "client_phone": clientPhone,
         "requested_description": requestedDescription,
         "requested_date": "${requestedDate.year.toString().padLeft(4, '0')}-${requestedDate.month.toString().padLeft(2, '0')}-${requestedDate.day.toString().padLeft(2, '0')}",
         "requested_id": requestedId,

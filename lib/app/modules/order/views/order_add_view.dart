@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yasr/app/component/custemImgePicker/CustemImagePicker.dart';
 import 'package:yasr/app/modules/order/controllers/order_controller.dart';
 import 'package:yasr/app/data/helper/AppEnumeration.dart';
 import 'package:yasr/app/data/helper/AppTheme.dart';
@@ -34,7 +35,6 @@ class OrderAddView extends GetView<OrderController> {
                       (e) => int.parse(e['id'].toString())).toList(),
                   labelDropdownButton: 'نوع العميل',
                   onChanged: (value) {
-                   
                     controller.client_type = value;
                   },
                 ),
@@ -45,8 +45,8 @@ class OrderAddView extends GetView<OrderController> {
                   listDropdownValue: ListRequest.map(
                       (e) => int.parse(e['request_id'].toString())).toList(),
                   labelDropdownButton: 'نوع الطلب',
-                  onChanged: (value){
-                      controller.requested_type = value;
+                  onChanged: (value) {
+                    controller.requested_type = value;
                   },
                 ),
                 CustomDropdownButton(
@@ -56,7 +56,7 @@ class OrderAddView extends GetView<OrderController> {
                       ListCity.map((e) => int.parse(e['state_id'].toString()))
                           .toList(),
                   labelDropdownButton: 'مكان القضية',
-                  onChanged: (value){
+                  onChanged: (value) {
                     controller.requested_state = value;
                   },
                 ),
@@ -73,40 +73,33 @@ class OrderAddView extends GetView<OrderController> {
                   inputHit: 'ادخال تفاصيل الطلب',
                   inputController: controller.requested_description,
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(right: 20, top: 10, bottom: 10),
-                  child: Row(
-                    children: [
-                      InkWell(
-                        child: SizedBox(
-                          width: 40,
-                          height: 40,
-                          child: Image.asset('assets/image/imageupload.png'),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      InkWell(
-                        child: SizedBox(
-                          width: 40,
-                          height: 40,
-                          child: Image.asset('assets/image/soundrecord.png'),
-                        ),
-                      )
-                    ],
-                  ),
+                SizedBox(
+                  height: 10,
+                ),
+                IconButton(
+                  icon: Icon(Icons.record_voice_over_outlined),
+                  onPressed: () {},
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                CustemImagePicker(
+                  onclick: (filedata) {
+                    //controller.ImageFile = filedata;
+                  },
                 ),
                 CustomCheckBox(
                   labelCheckBox: 'تحديد متوسط سعر تقريبي للخدمة المقدمة',
                 ),
                 RaisedButton(
                   onPressed: () {
-                       FocusScope.of(context).requestFocus(new FocusNode());
+                    
+                    FocusScope.of(context).requestFocus(new FocusNode());
+                    
                     if (_formKey.currentState.validate()) {
                       controller.createClientOrder();
                     }
+
                   },
                   child: Text('ارسال الطلب'),
                   elevation: 2,

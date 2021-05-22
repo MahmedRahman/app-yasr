@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yasr/app/modules/order/controllers/order_controller.dart';
 import 'package:yasr/app/routes/app_pages.dart';
 import 'package:yasr/app/data/helper/AppUtils.dart';
 import 'package:yasr/app/data/component/CustomTextFormFiled.dart';
 
 class OrderConfarmView extends GetView {
+  TextEditingController paymentText = new TextEditingController();
+  OrderController controller = Get.put(OrderController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,22 +28,18 @@ class OrderConfarmView extends GetView {
               CustomTextFormFiled(
                 inputLabel: 'قيمة اجر المحامى',
                 inputHit: 'ادخال أجمالي قيمة اجر المحامى ',
-              ),
-              CustomTextAreaFormFiled(
-                inputHit: 'برجاء كتابة تفاصيل اكثر بخصوص اجر المحامى',
-                inputLabel: 'تفاصيل ',
+                keyboardType: TextInputType.number,
+                inputController: paymentText,
               ),
               SizedBox(
                 height: 20,
               ),
               RaisedButton(
                 onPressed: () {
-                  AppUtils().showSnackBar(
-                      title: '',
-                      message: '',
-                      onstatusBarClosed: () {
-                        Get.toNamed(Routes.CLIENT);
-                      });
+                  FocusScope.of(context).unfocus();
+
+                  controller.chose_lawyer(
+                      Get.arguments[0], Get.arguments[1], paymentText.text);
                 },
                 child: Text('تأكيد المحامى'),
               ),

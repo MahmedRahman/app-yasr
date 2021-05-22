@@ -1,8 +1,15 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/interceptors/get_modifiers.dart';
+import 'package:yasr/app/api/response_model.dart';
+import 'package:yasr/app/api/web_serives.dart';
+import 'package:yasr/app/modules/order/model/offer_detailes.dart';
 import 'package:yasr/app/modules/order/model/order_detailes_model.dart';
+import 'package:yasr/app/modules/order/model/order_lawer_detailes.dart';
 import 'package:yasr/app/modules/order/model/order_model.dart';
-import 'package:yasr/app/modules/order/provider/order_provider.dart';
 import 'package:yasr/app/routes/app_pages.dart';
 import 'package:yasr/app/data/helper/AppConstant.dart';
 import 'package:yasr/app/data/helper/AppUtils.dart';
@@ -12,71 +19,108 @@ class OrderController extends GetxController {
   String client_type;
   String requested_type;
   String requested_state;
-  TextEditingController requested_title =new TextEditingController();
-  TextEditingController requested_description=new TextEditingController();
+  TextEditingController requested_title = new TextEditingController();
+  TextEditingController requested_description = new TextEditingController();
+  File ImageFile;
 
   var allRequests = List<AllRequest>().obs;
 
-  var requesteDetail = new RequesteDetail().obs;
+  var requesteDetail = Future.value().obs;
 
   getClientOrderList({@required int requestid}) async {
-    await OrderProvider(
-      
-    ).getClientOrderList(
-      requestType: requestid
-    ).then((value) {
-      print(value);
+    ResponsModel responsModel =
+        await WebServices().getClientOrderList(requestType: requestid);
 
-      final requestedModel = requestedModelFromJson(value);
+    if (responsModel.success) {
+      Response response = responsModel.data;
+      final requestedModel = requestedModelFromJson(response.bodyString);
       allRequests.clear();
       allRequests.addAll(requestedModel.result.allRequests);
-//requestedModel.result.requestedDetails.
-
-      return '';
-    });
+    }
   }
 
   getClientOrderDetailes(String id_request) async {
-    
-    await OrderProvider().getClientOrderDetailes(id_request).then((value) {
+    ResponsModel responsModel =
+        await WebServices().getClientOrderDetailes(id_request);
 
-      
-
-      final requestedDetailesModel = requestedDetailesModelFromJson(value);
-
-      requesteDetail.value =
-          requestedDetailesModel.result.requesteDetails.elementAt(0);
-
-      // allRequests.clear();
-      // allRequests.addAll(requestedModel.result.allRequests);
-//requestedModel.result.requestedDetails.
-
-      return '';
-    });
+    if (responsModel.success) {
+      Response response = responsModel.data;
+      final requestedDetailesModel =
+          requestedDetailesModelFromJson(response.bodyString);
+      requesteDetail.value = Future.value(requestedDetailesModel);
+    }
   }
 
   createClientOrder() async {
-    await OrderProvider()
-        .createClientOrder(
-            client_type: client_type,
-            requested_type: requested_type,
-            requested_state: requested_state,
-            requested_title: requested_title.text,
-            requested_description: requested_description.text)
-        .then((value) {
-      AppUtils().showSnackBar(
-        title: appName,
-        message: value,
-        onstatusBarClosed: () {
-     Get.toNamed(Routes.CLIENT, arguments: ["0"]);
-        },
-      );
-    }, onError: (err) {
-      AppUtils().showSnackBar(
-        title: appName,
-        message: err,
-        onstatusBarClosed: () {},
-      );
-    });
+    ResponsModel responsModel = await WebServices().createClientOrder(
+      client_type: client_type,
+      requested_type: requested_type,
+      requested_state: requested_state,
+      requested_title: requested_title.text,
+      requested_description: requested_description.text,
+      file: ImageFile,
+    );
+
+    if (responsModel.success) {
+      Response response = responsModel.data;
+
+      if (response.body['status']) {
+        AppUtils().showSnackBar(
+          title: appName,
+          message: 'تم الاضافة بنجاح',
+          onstatusBarClosed: () {
+            Get.toNamed(Routes.CLIENT, arguments: ["0"]);
+          },
+        );
+      }
+    }
+  }
+
+  void recordSound() {
+    /*
+    bool hasPermission = await FlutterAudioRecorder.hasPermissions;
+var recorder = FlutterAudioRecorder("file_path.mp4"); // .wav .aac .m4a
+await recorder.initialized;
+await recorder.start();
+var recording = await recorder.current(channel: 0);*/
+  }
+
+  TextEditingController offer_price = new TextEditingController();
+  TextEditingController offer_title = new TextEditingController();
+
+  OfferDetailes(int id_request, int id_lawyer) async {
+    ResponsModel responsModel = await WebServices()
+        .offerDeatiles(id_request: id_request, id_lawyer: id_lawyer);
+
+    if (responsModel.success) {
+      Response response = responsModel.data;
+      if (response.body['status']) {
+        final requestedOfferModel =
+            requestedOfferModelFromJson(response.bodyString);
+        return requestedOfferModel;
+      }
+    }
+  }
+
+  chose_lawyer(
+    String id_lawyer,
+    String id_request,
+    String payment_value,
+  ) async {
+    ResponsModel responsModel = await WebServices().chose_lawyer(
+      payment_value: payment_value,
+      id_lawyer: id_lawyer,
+      id_offer: '',
+      id_request: id_request,
+    );
+
+    if (responsModel.success) {
+      Response response = responsModel.data;
+
+      if (response.body['status']) {
+        Get.snackbar(appName, 'تم اختيار المحامى');
+        Get.toNamed(Routes.CLIENT, arguments: ["0"]);
+      }
+    }
   }
 }

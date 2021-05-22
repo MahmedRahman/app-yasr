@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:yasr/app/modules/order/controllers/order_controller.dart';
 import 'package:yasr/app/modules/order/model/order_model.dart';
 import 'package:yasr/app/routes/app_pages.dart';
@@ -16,8 +17,6 @@ class HomePage extends StatelessWidget {
         future: _orderController.getClientOrderList(requestid: requestid),
         builder: (c, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-
-            
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -53,12 +52,13 @@ class HomePage extends StatelessWidget {
 
                           return ListTile(
                             onTap: () {
-                              Get.toNamed(Routes.OrderDetailsView,
-                                  arguments: [request.requestedId]);
+                              Get.toNamed(Routes.OrderDetailsView,arguments: [request.requestedId]);
                             },
                             title: Text(request.requestedTitle),
                             subtitle: Text(request.requestedState),
-                            trailing: Text(request.requestedDate.toString()),
+                            trailing: Text(DateFormat('yyyy-MM-dd')
+                                .format(request.requestedDate)
+                                .toString()),
                             leading: SizedBox(
                               height: 32,
                               width: 32,

@@ -8,6 +8,7 @@ import 'package:yasr/app/routes/app_pages.dart';
 import 'package:yasr/app/data/helper/AppTheme.dart';
 
 class TechnicalSupporView extends GetView<TechnicalSupporController> {
+  TechnicalSupporController controller = Get.put(TechnicalSupporController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(

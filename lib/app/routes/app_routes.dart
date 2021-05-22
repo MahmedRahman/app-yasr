@@ -34,21 +34,16 @@ abstract class Routes {
 
   static const ChatUserView = '/ChatUserView';
 
-
-
   static const PERMISSIONS = '/permissions';
 
   static const PermissionsAddView = '/PermissionsAddView';
 
   static const PermissionsEditView = '/PermissionsEditView';
 
-  
   static const CHAT = '/chat';
   static const ORDER = '/order';
- static const TechnicalSupporDetailesView = '/TechnicalSupporDetailesView';
-
-
-
+  static const TechnicalSupporDetailesView = '/TechnicalSupporDetailesView';
 
   static const ENTRY_POINT = '/entry-point';
+  static const ORDER_PROVIDER = '/order-provider';
 }

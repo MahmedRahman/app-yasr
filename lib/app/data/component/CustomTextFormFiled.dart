@@ -6,6 +6,7 @@ class CustomTextFormFiled extends StatelessWidget {
   final TextEditingController inputController;
   final TextInputType keyboardType;
   final FormFieldSetter<String> onValidator;
+ 
   const CustomTextFormFiled({
     Key key,
     this.inputLabel,
@@ -45,6 +46,7 @@ class CustomTextFormFiled extends StatelessWidget {
             obscureText: keyboardType!=TextInputType.visiblePassword ? false : true ,
             decoration: InputDecoration(
               errorStyle: TextStyle(fontSize: 14),
+              
               isDense: true,
               filled: true,
               contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),

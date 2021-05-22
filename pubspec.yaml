@@ -33,7 +33,11 @@ dependencies:
   loading_indicator: ^1.2.0
   connectivity: ^3.0.3
   cupertino_icons: ^1.0.0
-
+  image_picker: ^0.7.3
+  image_cropper: ^1.4.0
+  cached_network_image: ^2.5.0
+  flutter_easyloading: ^3.0.0
+ 
 
 dev_dependencies:
   flutter_test:

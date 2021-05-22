@@ -15,7 +15,7 @@ import 'package:yasr/app/data/helper/AppTheme.dart';
 import 'package:yasr/app/services/auth.dart';
 
 class ClientView extends GetView<ClientController> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  //final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -209,7 +209,7 @@ class ClientView extends GetView<ClientController> {
           ),
         ),
         body: Scaffold(
-          key: _scaffoldKey,
+         // key: _scaffoldKey,
           body: Obx(() {
             return IndexedStack(
               index: pageIndex.value,
@@ -257,7 +257,19 @@ class HomePageTab extends StatelessWidget {
                     ),
                     iconMargin: EdgeInsets.all(5),
                     child: Text(
-                      'طلبات قائمة',
+                      'طلبات منتظرة',
+                      style: TextStyle(fontSize: 8, color: Colors.white ,fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Tab(
+                    icon: SizedBox(
+                      height: 32,
+                      width: 32,
+                      child: Image.asset('assets/image/order3.png'),
+                    ),
+                    iconMargin: EdgeInsets.all(5),
+                    child: Text(
+                      'طلبات حالية',
                       style: TextStyle(fontSize: 8, color: Colors.white),
                     ),
                   ),
@@ -282,18 +294,6 @@ class HomePageTab extends StatelessWidget {
                     iconMargin: EdgeInsets.all(5),
                     child: Text(
                       'طلبات مرفوضة',
-                      style: TextStyle(fontSize: 8, color: Colors.white),
-                    ),
-                  ),
-                  Tab(
-                    icon: SizedBox(
-                      height: 32,
-                      width: 32,
-                      child: Image.asset('assets/image/order3.png'),
-                    ),
-                    iconMargin: EdgeInsets.all(5),
-                    child: Text(
-                      'طلبات قائمة',
                       style: TextStyle(fontSize: 8, color: Colors.white),
                     ),
                   ),

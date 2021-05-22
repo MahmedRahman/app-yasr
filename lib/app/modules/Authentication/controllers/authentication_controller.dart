@@ -1,266 +1,227 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yasr/app/api/response_model.dart';
+import 'package:yasr/app/api/web_serives.dart';
 import 'package:yasr/app/modules/Authentication/model/customerInfoModel.dart';
 import 'package:yasr/app/modules/Authentication/model/smsSendCodeModel.dart';
-import 'package:yasr/app/modules/Authentication/provider/Authentication_provider.dart';
 import 'package:yasr/app/routes/app_pages.dart';
 import 'package:yasr/app/services/auth.dart';
 import 'package:yasr/app/data/helper/AppConstant.dart';
 import 'package:yasr/app/data/helper/AppUtils.dart';
 
 class AuthenticationController extends GetxController {
-  var autovalidateMode = AutovalidateMode.disabled.obs;
 
-  AuthenticationProvider _authenticationProvider;
 
-  TextEditingController fullName;
-  TextEditingController phone;
-  TextEditingController address;
-  TextEditingController idNumber;
-  TextEditingController activationCode;
+  TextEditingController fullName = TextEditingController();
+  TextEditingController phone = TextEditingController();
+  TextEditingController address = TextEditingController();
+  TextEditingController idNumber = TextEditingController();
+  TextEditingController activationCode = TextEditingController();
   String cityID;
-  bool termsConditionsStatus;
+  bool termsConditionsStatus = false;
+  TextEditingController password = TextEditingController();
 
   @override
   void onInit() {
-    fullName = TextEditingController();
-    phone = TextEditingController();
-    address = TextEditingController();
-    idNumber = TextEditingController();
-    activationCode = TextEditingController();
-    termsConditionsStatus = false;
-    _authenticationProvider = AuthenticationProvider();
-
-
     super.onInit();
   }
 
-  void signinClient() {
-    _authenticationProvider
-        .signinClient(
+  void signinClient() async {
+    ResponsModel responsModel = await WebServices().signin(
       phone: phone.text.trim(),
-      idNumber: idNumber.text.trim(),
-    )
-        .then((value) {
-      final customerInfoModel = customerInfoModelFromJson(value);
+      password: password.text.trim(),
+      user_type: '0',
+    );
 
-      Get.find<UserServices>()
-          .setUserToken(customerInfoModel.result.customerInfo.token.toString());
+    if (responsModel.success) {
+      Response response = responsModel.data;
 
-      Get.find<UserServices>().setfullName(
-          customerInfoModel.result.customerInfo.fullname.toString());
+      if (response.body['status']) {
+        final customerInfoModel =
+            customerInfoModelFromJson(response.bodyString);
 
-      Get.find<UserServices>().setUserRole('0');
+        Get.find<UserServices>().setUserToken(
+            customerInfoModel.result.customerInfo.token.toString());
+        Get.find<UserServices>().setfullName(
+            customerInfoModel.result.customerInfo.fullname.toString());
+        Get.find<UserServices>().setUserRole('0');
+        Get.find<UserServices>().setphoneNumber(
+            customerInfoModel.result.customerInfo.phone.toString());
 
-      Get.find<UserServices>().setphoneNumber(
-          customerInfoModel.result.customerInfo.phone.toString());
-
-      print(customerInfoModel.result.customerInfo.token.toString());
-
-      AppUtils().showSnackBar(
-          title: appName,
-          message:
-              ' ${customerInfoModel.result.customerInfo.fullname} مرحبا بكم فى التطبيق ',
-          onstatusBarClosed: () {
-            Get.toNamed(Routes.CLIENT);
-          });
-    }, onError: (err) {
-      var jsonRespons = json.decode(err);
-      print(err);
-      switch (jsonRespons['codenum']) {
-        case 405:
-          AppUtils().showSnackBar(
+        AppUtils().showSnackBar(
             title: appName,
-            message: jsonRespons['message'],
+            message: ' تم تسجيل الدخول ',
             onstatusBarClosed: () {
-              Get.toNamed(Routes.UserOtpView);
-            },
-          );
-          break;
+              Get.toNamed(Routes.CLIENT);
+            });
+      } else {
+        AppUtils().showSnackBar(
+            title: appName,
+            message: response.body['message'],
+            onstatusBarClosed: () {});
 
-        case 401:
-          AppUtils().showSnackBar(
-              title: appName,
-              message: jsonRespons['message'],
-              onstatusBarClosed: () {});
-          break;
-
-        default:
-          AppUtils().showSnackBar(
-              title: appName,
-              message: jsonRespons['message'],
-              onstatusBarClosed: () {});
+        if (response.body['codenum'] == 405) {
+          Get.toNamed(Routes.UserOtpView, arguments: [phone.text, 0]);
+        }
       }
-    });
+    }
   }
 
-  void createClientAccount() {
-    _authenticationProvider
-        .createClientAccount(
+  void createClientAccount() async {
+    ResponsModel responsModel = await WebServices().createClientAccount(
+        fullname: fullName.text,
+        address: address.text,
+        cityId: cityID,
+        idNumber: idNumber.text.trim(),
+        phone: phone.text.trim(),
+        password: password.text);
+
+    if (responsModel.success) {
+      Response response = responsModel.data;
+
+      if (response.body['status']) {
+        fullName.clear();
+        address.clear();
+        AppUtils().showSnackBar(
+            title: appName,
+            message: 'تم التسجيل بنجاح',
+            onstatusBarClosed: () {
+              Get.toNamed(Routes.ClientSigninView);
+            });
+      } else {
+        AppUtils().showSnackBar(
+            title: appName,
+            message: response.body['message'],
+            onstatusBarClosed: () {});
+      }
+    }
+  }
+
+  void createLawyerAccount() async {
+    ResponsModel responsModel = await WebServices().createLawyerAccount(
       fullname: fullName.text,
       address: address.text,
       cityId: cityID,
       idNumber: idNumber.text.trim(),
       phone: phone.text.trim(),
-    )
-        .then((value) {
-      print('AuthenticationController createClientAccount');
-      print(value);
+    );
 
-      //smsSend(phone: phone);
+    if (responsModel.success) {
+      Response response = responsModel.data;
 
-      fullName.clear();
-      address.clear();
-      //idNumber.clear();
-      //phone.clear();
-
-      AppUtils().showSnackBar(
-          title: appName,
-          message: 'تم التسجيل بنجاح',
-          onstatusBarClosed: () {
-            Get.toNamed(Routes.ClientSigninView);
-          });
-    }, onError: (err) {
-      AppUtils()
-          .showSnackBar(title: appName, message: err, onstatusBarClosed: () {});
-    });
+      if (response.body['status']) {
+        fullName.clear();
+        address.clear();
+        AppUtils().showSnackBar(
+            title: appName,
+            message: 'تم التسجيل بنجاح',
+            onstatusBarClosed: () {
+              Get.toNamed(Routes.ClientSigninView);
+            });
+      } else {
+        AppUtils().showSnackBar(
+            title: appName,
+            message: response.body['message'],
+            onstatusBarClosed: () {});
+      }
+    }
   }
 
-  void createLawyerAccount() {
-    _authenticationProvider
-        .createClientAccount(
-      fullname: fullName.text,
-      address: address.text,
-      cityId: cityID,
-      idNumber: idNumber.text.trim(),
+  void signinLawyer() async {
+    ResponsModel responsModel = await WebServices().signin(
       phone: phone.text.trim(),
-    )
-        .then((value) {
-      print('AuthenticationController createClientAccount');
-      print(value);
+      password: password.text.trim(),
+      user_type: '1',
+    );
 
-      //smsSend(phone: phone);
+    if (responsModel.success) {
+      Response response = responsModel.data;
 
-      fullName.clear();
-      address.clear();
-      //idNumber.clear();
-      //phone.clear();
+      if (response.body['status']) {
+        final customerInfoModel =
+            customerInfoModelFromJson(response.bodyString);
 
-      AppUtils().showSnackBar(
-          title: appName,
-          message: 'تم التسجيل بنجاح',
-          onstatusBarClosed: () {
-            Get.toNamed(Routes.LawyerSigninView);
-          });
-    }, onError: (err) {
-      AppUtils()
-          .showSnackBar(title: appName, message: err, onstatusBarClosed: () {});
-    });
+        Get.find<UserServices>().setUserToken(
+            customerInfoModel.result.customerInfo.token.toString());
+        Get.find<UserServices>().setfullName(
+            customerInfoModel.result.customerInfo.fullname.toString());
+        Get.find<UserServices>().setUserRole('1');
+        Get.find<UserServices>().setphoneNumber(
+            customerInfoModel.result.customerInfo.phone.toString());
+
+        AppUtils().showSnackBar(
+            title: appName,
+            message: ' تم تسجيل الدخول ',
+            onstatusBarClosed: () {
+              Get.toNamed(Routes.CLIENT);
+            });
+      } else {
+        AppUtils().showSnackBar(
+            title: appName,
+            message: response.body['message'],
+            onstatusBarClosed: () {});
+
+        if (response.body['codenum'] == 405) {
+          Get.toNamed(Routes.UserOtpView, arguments: [phone.text, 0]);
+        }
+      }
+    }
   }
 
-  void signinLawyer() {
-    _authenticationProvider
-        .signinLawyer(
-      phone: phone.text.trim(),
-      idNumber: idNumber.text.trim(),
-    )
-        .then((value) {
-      print(value);
-      final customerInfoModel = customerInfoModelFromJson(value);
+  void smsSend(int userType, String phone) async {
+    ResponsModel responsModel = await WebServices().smsSend(
+      phone: phone,
+      userType: userType,
+    );
 
-      Get.find<UserServices>()
-          .setUserToken(customerInfoModel.result.customerInfo.token.toString());
-
-      
-
-      Get.find<UserServices>().setUserRole('1');
-
-      Get.find<UserServices>().setfullName(
-          customerInfoModel.result.customerInfo.fullname.toString());
-
-      Get.find<UserServices>().setphoneNumber(
-          customerInfoModel.result.customerInfo.phone.toString());
-
-      print(customerInfoModel.result.customerInfo.token.toString());
-
-      AppUtils().showSnackBar(
+    if (responsModel.success) {
+      Response response = responsModel.data;
+      if (response.body['status']) {
+        AppUtils().showSnackBar(
           title: appName,
           message:
-              ' ${customerInfoModel.result.customerInfo.fullname} مرحبا بكم فى التطبيق ',
-          onstatusBarClosed: () {
-            Get.toNamed(Routes.LAWYER);
-          });
-    }, onError: (err) {
-      var jsonRespons = json.decode(err);
-      print(err);
-      switch (jsonRespons['codenum']) {
-        case 405:
-          AppUtils().showSnackBar(
-            title: appName,
-            message: jsonRespons['message'],
-            onstatusBarClosed: () {
-              Get.toNamed(Routes.UserOtpView);
-            },
-          );
-          break;
-
-        case 401:
-          AppUtils().showSnackBar(
-              title: appName,
-              message: jsonRespons['message'],
-              onstatusBarClosed: () {});
-          break;
-
-        default:
-          AppUtils().showSnackBar(
-              title: appName,
-              message: jsonRespons['message'],
-              onstatusBarClosed: () {});
+              'كود التفعيل هو ${response.body['result']['activation_code']}',
+          onstatusBarClosed: () {},
+        );
+      } else {
+        AppUtils().showSnackBar(
+          title: appName,
+          message: 'غير مسموح اعادة الارسال لمدة دقيقة',
+          onstatusBarClosed: () {},
+        );
       }
-    });
+    }
   }
 
-  void smsSend() {
-    AuthenticationProvider().smsSend(phone: phone.text.trim()).then((value) {
-      final smsSendCodeModel = smsSendCodeModelFromJson(value);
-
-      print(value);
-      AppUtils().showSnackBar(
-        title: appName,
-        message: 'تم ارسال كود التفعيل',
-        onstatusBarClosed: () {},
-      );
-    }, onError: (err) {
-      AppUtils().showSnackBar(
-        title: appName,
-        message: err,
-        onstatusBarClosed: () {},
-      );
-    });
-  }
-
-  void smsConfirm() {
-    print(activationCode.text.trim());
-    print(phone.text.trim());
-
-    _authenticationProvider
-        .smsConfirm(
-      phone: phone.text.trim(),
+  void smsConfirm(int userType, String phone) async {
+    ResponsModel responsModel = await WebServices().smsConfirm(
+      phone: phone,
       activationCode: activationCode.text.trim(),
-    )
-        .then((value) {
-      AppUtils().showSnackBar(
-          title: appName,
-          message: 'تم تفعيل الحساب',
-          onstatusBarClosed: () {
-            Get.back();
-          });
-    }, onError: (err) {
-      AppUtils()
-          .showSnackBar(title: appName, message: err, onstatusBarClosed: () {});
-    });
+      userType: userType,
+    );
+
+    if (responsModel.success) {
+      Response response = responsModel.data;
+
+      print(response.bodyString);
+
+      if (response.body['status']) {
+        AppUtils().showSnackBar(
+            title: appName,
+            message: 'تم تفعيل الحساب',
+            onstatusBarClosed: () {
+              Get.back();
+            });
+      } else {
+        AppUtils().showSnackBar(
+            title: appName,
+            message: 'خطاء فى التفعيل',
+            onstatusBarClosed: () {});
+      }
+    }
   }
 }
