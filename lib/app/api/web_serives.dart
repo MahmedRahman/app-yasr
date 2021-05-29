@@ -207,13 +207,13 @@ class WebServices extends APIManger {
   }) async {
     //var formData = new FormData();
 
-    ResponsModel response = await repPost(
+    ResponsModel response = await repsmsPost(
         'agents/confirm',
-        {
+    {
           'key': api_key,
-          'phone': int.parse(phone),
-          'activation_code': int.parse(activationCode),
-          'client_type': userType,
+          'phone': '0800800800',
+          'activation_code': '1234',
+          'client_type': 0,
         },
         showLoading: true);
 

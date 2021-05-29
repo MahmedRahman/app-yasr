@@ -9,11 +9,10 @@ import 'package:yasr/app/data/component/CustomTextFormFiled.dart';
 
 class LawyerSigninView extends GetView<AuthenticationController> {
   final _formKey = GlobalKey<FormState>();
-
+ 
   @override
   Widget build(BuildContext context) {
-    controller.phone.text = "12345678";
-    controller.password.text = "123456";
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(15),

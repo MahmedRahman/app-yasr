@@ -10,8 +10,7 @@ class ClientSigninView extends GetView<AuthenticationController> {
 
   @override
   Widget build(BuildContext context) {
-    controller.phone.text="01223846165";
-    controller.password.text="123456";
+
 
     return Scaffold(
       body: Padding(

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yasr/app/api/api_manger.dart';
 import 'package:yasr/app/api/response_model.dart';
 import 'package:yasr/app/api/web_serives.dart';
 import 'package:yasr/app/data/helper/AppConstant.dart';
@@ -8,6 +9,8 @@ import 'package:yasr/app/data/helper/AppUtils.dart';
 import 'package:yasr/app/modules/Authentication/model/customerInfoModel.dart';
 import 'package:yasr/app/routes/app_pages.dart';
 import 'package:yasr/app/services/auth.dart';
+import 'package:get/get_connect/connect.dart' as http;
+
 
 class AuthenticationController extends GetxController {
   TextEditingController fullName = TextEditingController();
@@ -199,10 +202,17 @@ class AuthenticationController extends GetxController {
   }
 
   void smsConfirm(int userType, String phone) async {
+
+
+
+
+
+
+
     ResponsModel responsModel = await WebServices().smsConfirm(
-      phone: phone,
-      activationCode: activationCode.text.trim(),
-      userType: userType,
+      phone: '0800800800',
+      activationCode: '1234',
+      userType: 0,
     );
 
     if (responsModel.success) {
@@ -223,6 +233,9 @@ class AuthenticationController extends GetxController {
             message: 'خطاء فى التفعيل',
             onstatusBarClosed: () {});
       }
+
     }
+    
+      
   }
 }
