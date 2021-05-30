@@ -206,17 +206,26 @@ class WebServices extends APIManger {
     @required int userType,
   }) async {
     //var formData = new FormData();
+    FormData formData = new FormData({
+      'key': api_key,
+      'phone': phone,
+      'activation_code': activationCode,
+      'client_type': userType,
+    });
 
     ResponsModel response = await repsmsPost(
-        'agents/confirm',
-    {
+        'agents/confirm_test',
+        FormData({
           'key': api_key,
-          'phone': '0800800800',
-          'activation_code': '1234',
+          'phone': 555555,
+          'activation_code': 1234,
           'client_type': 0,
-        },
+        }),
         showLoading: true);
 
+    print('object');
+
+    print(response.data.bodyString);
     return response;
   }
 
@@ -226,6 +235,7 @@ class WebServices extends APIManger {
     @required phone,
     @required idNumber,
     @required cityId,
+    @required password,
   }) async {
     ResponsModel response = await repPost(
         'agents/create_account',
@@ -237,7 +247,8 @@ class WebServices extends APIManger {
           'id_number': idNumber,
           'city_id': cityId,
           'client_type': '1',
-          'lawyer_type': '0'
+          'lawyer_type': '0',
+          'password': password,
         },
         showLoading: true);
 

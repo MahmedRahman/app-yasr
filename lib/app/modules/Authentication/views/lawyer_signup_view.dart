@@ -52,7 +52,7 @@ class LawyerSignupView extends GetView<AuthenticationController> {
                         .toList(),
                 labelDropdownButton: 'City'.tr,
                 onChanged: (value) {
-                  // controller.s
+                   controller.cityID =value;
                 },
               ),
               CustomTextFormFiled(
@@ -74,7 +74,7 @@ class LawyerSignupView extends GetView<AuthenticationController> {
                 },
               ),
               CustomTextFormFiled(
-                inputController: controller.idNumber,
+                inputController: controller.password,
                 inputLabel: 'كلمة المرور',
                 inputHit: 'كلمة المرور',
                 keyboardType: TextInputType.visiblePassword,

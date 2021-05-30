@@ -11,7 +11,6 @@ import 'package:yasr/app/routes/app_pages.dart';
 import 'package:yasr/app/services/auth.dart';
 import 'package:get/get_connect/connect.dart' as http;
 
-
 class AuthenticationController extends GetxController {
   TextEditingController fullName = TextEditingController();
   TextEditingController phone = TextEditingController();
@@ -108,6 +107,7 @@ class AuthenticationController extends GetxController {
       cityId: cityID,
       idNumber: idNumber.text.trim(),
       phone: phone.text.trim(),
+       password: password.text
     );
 
     if (responsModel.success) {
@@ -120,7 +120,7 @@ class AuthenticationController extends GetxController {
             title: appName,
             message: 'تم التسجيل بنجاح',
             onstatusBarClosed: () {
-              Get.toNamed(Routes.ClientSigninView);
+              Get.toNamed(Routes.LawyerSigninView);
             });
       } else {
         AppUtils().showSnackBar(
@@ -202,17 +202,12 @@ class AuthenticationController extends GetxController {
   }
 
   void smsConfirm(int userType, String phone) async {
-
-
-
-
-
-
+    print(userType);
 
     ResponsModel responsModel = await WebServices().smsConfirm(
-      phone: '0800800800',
-      activationCode: '1234',
-      userType: 0,
+      phone: phone,
+      activationCode: activationCode.text,
+      userType: userType,
     );
 
     if (responsModel.success) {
@@ -229,13 +224,11 @@ class AuthenticationController extends GetxController {
             });
       } else {
         AppUtils().showSnackBar(
-            title: appName,
-            message: 'خطاء فى التفعيل',
-            onstatusBarClosed: () {});
+          title: appName,
+          message: response.body['message'],
+          onstatusBarClosed: () {},
+        );
       }
-
     }
-    
-      
   }
 }

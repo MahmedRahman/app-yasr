@@ -41,10 +41,10 @@ class UserOtpView extends GetView<AuthenticationController> {
                 ),
                 RaisedButton(
                   onPressed: () {
-   FocusScope.of(context).unfocus();
+                    FocusScope.of(context).unfocus();
                     if (_formKey.currentState.validate()) {
                       // Get.toNamed(Routes.CLIENT);
-                      controller.smsConfirm(usertype ,phonenumber);
+                      controller.smsConfirm(usertype, phonenumber);
                     }
                   },
                   child: Text('Account Confirmation'.tr),
@@ -56,9 +56,7 @@ class UserOtpView extends GetView<AuthenticationController> {
                   onPressed: () {
                     FocusScope.of(context).unfocus();
 
-                    controller.smsSend(
-                      usertype,phonenumber 
-                    );
+                    controller.smsSend(usertype, phonenumber);
                   },
                   child: Text('ارسال كود التفعيل'),
                 )

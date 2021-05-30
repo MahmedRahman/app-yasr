@@ -140,6 +140,7 @@ class APIManger extends GetConnect {
   }
 
   Future<ResponsModel> repsmsPost(url, body, {bool showLoading = false}) async {
+   
     if (showLoading) {
       EasyLoading.show(status: 'Loading ...');
     }
@@ -147,11 +148,9 @@ class APIManger extends GetConnect {
     print("Api Request ${baes_url}${url} xx");
 
     Response response = await post(baes_url + url, body, headers: {
-      'Content-type': 'multipart/form-data; boundary=5',
+      'Content-type': 'multipart/form-data',
       'Accept': 'application/json',
     });
-
-    
 
     print("Api Request ${baes_url}${url} ${response.statusCode} ");
 
@@ -167,7 +166,7 @@ class APIManger extends GetConnect {
             data: response,
           );
           break;
-
+          
         default:
           if (showLoading) {
             EasyLoading.showError('Error');

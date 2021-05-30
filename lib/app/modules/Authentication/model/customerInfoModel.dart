@@ -9,6 +9,8 @@ CustomerInfoModel customerInfoModelFromJson(String str) => CustomerInfoModel.fro
 String customerInfoModelToJson(CustomerInfoModel data) => json.encode(data.toJson());
 
 class CustomerInfoModel {
+
+
     CustomerInfoModel({
         this.message,
         this.codenum,
@@ -16,10 +18,12 @@ class CustomerInfoModel {
         this.result,
     });
 
+
     String message;
     int codenum;
     bool status;
     Result result;
+
 
     factory CustomerInfoModel.fromJson(Map<String, dynamic> json) => CustomerInfoModel(
         message: json["message"],
@@ -28,12 +32,15 @@ class CustomerInfoModel {
         result: Result.fromJson(json["result"]),
     );
 
+
     Map<String, dynamic> toJson() => {
         "message": message,
         "codenum": codenum,
         "status": status,
         "result": result.toJson(),
     };
+
+
 }
 
 class Result {
