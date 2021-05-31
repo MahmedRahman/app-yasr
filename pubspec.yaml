@@ -37,7 +37,9 @@ dependencies:
   image_cropper: ^1.4.0
   cached_network_image: ^2.5.0
   flutter_easyloading: ^3.0.0
- 
+  firebase_core: "^0.7.0"
+  firebase_database: "^6.0.0"
+
 
 dev_dependencies:
   flutter_test:

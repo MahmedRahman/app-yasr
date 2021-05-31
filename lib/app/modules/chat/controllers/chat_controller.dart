@@ -37,11 +37,7 @@ class ChatController extends GetxController {
   }
 */
   sendmsg() {
-    ChatMessage chatMessage = new ChatMessage(
-      msg: textEditingController.text.toString(),
-      refuid: refid,
-      uid: uuid,
-    );
+
 /*
     message
         .doc(roomID)

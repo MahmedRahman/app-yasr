@@ -153,6 +153,10 @@ class AuthenticationController extends GetxController {
         Get.find<UserServices>().setphoneNumber(
             customerInfoModel.result.customerInfo.phone.toString());
 
+
+
+            
+
         AppUtils().showSnackBar(
             title: appName,
             message: ' تم تسجيل الدخول ',

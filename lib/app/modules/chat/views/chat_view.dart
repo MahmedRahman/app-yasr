@@ -1,19 +1,97 @@
 //import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yasr/app/data/helper/AppConstant.dart';
 import 'package:yasr/app/modules/chat/Model/chatMessageModel.dart';
 import 'package:yasr/app/modules/chat/controllers/chat_controller.dart';
 import 'package:yasr/app/data/helper/AppTheme.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class ChatView extends GetView<ChatController> {
- 
   final ScrollController listScrollController = ScrollController();
+  final fb = FirebaseDatabase.instance;
+  TextEditingController inputtext = new TextEditingController();
+  
 
   @override
   Widget build(BuildContext context) {
-    return Text('data');
-    
-    
+    final ref = fb.reference();
+    final Future<FirebaseApp> _future = Firebase.initializeApp();
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('اسم الطلب'),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: StreamBuilder<Object>(
+                stream: ref.child('chat').child(RoomId).onValue,
+                builder: (BuildContext context, snapshot) {
+                  if (snapshot.hasData) {
+                    Event e = snapshot.data;
+
+                    Map<dynamic, dynamic> map = e.snapshot.value;
+
+                    List<dynamic> MsgList = map.values.toList();
+                    MsgList.sort((a, b) {
+                      return b["createdAt"].compareTo(a["createdAt"]);
+                    });
+                    return ListView(
+                      reverse: true,
+                      children: List.generate(MsgList.length, (index) {
+                        return ListTile(
+                          title: Text(MsgList.elementAt(index)['message']),
+                        );
+                      }),
+                    );
+                  }
+
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }),
+          ),
+          Divider(),
+          Row(
+            children: [
+              Expanded(
+                  child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: TextFormField(
+                  controller: inputtext,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.white,
+                    enabledBorder: OutlineInputBorder(),
+                  ),
+                ),
+              )),
+              IconButton(
+                  icon: Icon(Icons.send),
+                  onPressed: () {
+                    ChatMessage chatMessage = new ChatMessage(
+                      message: inputtext.text,
+                      createdAt: DateTime.now().toString(),
+                    );
+                    ref
+                        .child('chat')
+                        .child(RoomId)
+                        .push()
+                        .set(chatMessage.toJson());
+
+                    inputtext.clear();
+                  })
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          )
+        ],
+      ),
+    );
+
     /*Scaffold(
       appBar: AppBar(
         title: Text('ChatView'.tr),

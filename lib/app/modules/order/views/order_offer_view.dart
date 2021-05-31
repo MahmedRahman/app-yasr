@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yasr/app/data/helper/AppConstant.dart';
 import 'package:yasr/app/data/helper/AppUtils.dart';
 import 'package:yasr/app/modules/order/controllers/order_controller.dart';
 import 'package:yasr/app/modules/order/model/offer_detailes.dart';
+import 'package:yasr/app/routes/app_pages.dart';
 
 class OrderOfferView extends GetView {
   OrderController controller = Get.put(OrderController());
@@ -128,10 +130,28 @@ class OrderOfferView extends GetView {
                       onPressed: () {
                         FocusScope.of(context).requestFocus(new FocusNode());
 
-                        Get.snackbar('title', '${requestedOfferModel.result.lawyersList.lawyerPhone} ${data[2]}');
+                        Get.snackbar('title',
+                            '${requestedOfferModel.result.lawyersList.lawyerPhone} ${data[2]}');
 
                         print(
                             '${requestedOfferModel.result.lawyersList.lawyerPhone} ${data[2]}');
+
+                        int clientPhone = int.parse(data[2]);
+
+                        int userPhone = int.parse(
+                            requestedOfferModel.result.lawyersList.lawyerPhone);
+
+                        if (clientPhone < userPhone) {
+                          RoomId =
+                              '${clientPhone.toString()}${userPhone.toString()}';
+                        } else {
+                          RoomId =
+                              '${userPhone.toString()}${clientPhone.toString()}';
+                        }
+
+                        Get.toNamed(Routes.ChatView);
+
+//                        Get.toNamed(Routes.ChatView);
                       },
                       child: Text('محادثة مع المحامى'),
                       elevation: 2,

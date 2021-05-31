@@ -1,63 +1,42 @@
 {
   "project_info": {
-    "project_number": "455297170613",
-    "project_id": "chat-eac86",
-    "storage_bucket": "chat-eac86.appspot.com"
+    "project_number": "927436825476",
+    "firebase_url": "https://minasetyosr-default-rtdb.firebaseio.com",
+    "project_id": "minasetyosr",
+    "storage_bucket": "minasetyosr.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:455297170613:android:e4d030f72e2a3ae8d792fc",
+        "mobilesdk_app_id": "1:927436825476:android:830c6c99c5292cc5a473d1",
         "android_client_info": {
           "package_name": "com.atp.yasr.yasr"
         }
       },
       "oauth_client": [
         {
-          "client_id": "455297170613-25kthorkf3auc10ol8sc5ep515ps222m.apps.googleusercontent.com",
+          "client_id": "927436825476-0g6l3qjr9qp4aemjkkuuls8h0gsfp9ls.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCFEfkqCcT6TsLOL1JdlLfVWO-w3ytWyVY"
+          "current_key": "AIzaSyB5ZN11Hn-7U3rVD8v_PL7gt1Zm-gAkVoI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "455297170613-25kthorkf3auc10ol8sc5ep515ps222m.apps.googleusercontent.com",
+              "client_id": "927436825476-0g6l3qjr9qp4aemjkkuuls8h0gsfp9ls.apps.googleusercontent.com",
               "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:455297170613:android:54a0164d826b1724d792fc",
-        "android_client_info": {
-          "package_name": "com.atpnet.chatapp"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "455297170613-25kthorkf3auc10ol8sc5ep515ps222m.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCFEfkqCcT6TsLOL1JdlLfVWO-w3ytWyVY"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
+            },
             {
-              "client_id": "455297170613-25kthorkf3auc10ol8sc5ep515ps222m.apps.googleusercontent.com",
-              "client_type": 3
+              "client_id": "927436825476-dqmlgerio82k03jsnjaukdqkuph6jue4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.abdallah.Minasat-yosr"
+              }
             }
           ]
         }
