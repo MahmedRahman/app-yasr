@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:yasr/app/services/auth.dart';
 
 class ChatMessage {
   final String apiToken;
@@ -14,7 +16,7 @@ class ChatMessage {
      @required this.createdAt ,
     @required this.message,
     this.messageType = 'text',
-    this.senderName = 'Moahmed',
+   @required this.senderName  ,
     this.userType = '0',
   });
 

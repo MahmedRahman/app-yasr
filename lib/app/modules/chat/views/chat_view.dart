@@ -7,12 +7,12 @@ import 'package:yasr/app/modules/chat/controllers/chat_controller.dart';
 import 'package:yasr/app/data/helper/AppTheme.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:yasr/app/services/auth.dart';
 
 class ChatView extends GetView<ChatController> {
   final ScrollController listScrollController = ScrollController();
   final fb = FirebaseDatabase.instance;
   TextEditingController inputtext = new TextEditingController();
-  
 
   @override
   Widget build(BuildContext context) {
@@ -32,20 +32,43 @@ class ChatView extends GetView<ChatController> {
                   if (snapshot.hasData) {
                     Event e = snapshot.data;
 
-                    Map<dynamic, dynamic> map = e.snapshot.value;
+                    String MyNumber =
+                        Get.find<UserServices>().getPhoneNumber().toString();
 
-                    List<dynamic> MsgList = map.values.toList();
-                    MsgList.sort((a, b) {
-                      return b["createdAt"].compareTo(a["createdAt"]);
-                    });
-                    return ListView(
-                      reverse: true,
-                      children: List.generate(MsgList.length, (index) {
-                        return ListTile(
-                          title: Text(MsgList.elementAt(index)['message']),
-                        );
-                      }),
-                    );
+
+                    List<dynamic> MsgList = [];
+
+                    if (GetUtils.isNullOrBlank(e.snapshot.value)) {
+                    } else {
+                      Map<dynamic, dynamic> map = e.snapshot.value;
+                     MsgList = map.values.toList();
+                      MsgList.sort((a, b) {
+                        return b["createdAt"].compareTo(a["createdAt"]);
+                      });
+                    }
+
+                    return GetUtils.isNullOrBlank(e.snapshot.value)
+                        ? Center(child: Text('لا يوجد محادثة'))
+                        : ListView(
+                            reverse: true,
+                            children: List.generate(MsgList.length, (index) {
+                              return Align(
+                                alignment: MyNumber ==
+                                        MsgList.elementAt(index)['senderName']
+                                    ? Alignment.centerRight
+                                    : Alignment.centerLeft,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  child: Container(
+                                    child: Text(
+                                      MsgList.elementAt(index)['message'],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }),
+                          );
                   }
 
                   return Center(
@@ -72,9 +95,11 @@ class ChatView extends GetView<ChatController> {
                   icon: Icon(Icons.send),
                   onPressed: () {
                     ChatMessage chatMessage = new ChatMessage(
-                      message: inputtext.text,
-                      createdAt: DateTime.now().toString(),
-                    );
+                        message: inputtext.text,
+                        createdAt: DateTime.now().toString(),
+                        senderName: Get.find<UserServices>()
+                            .getPhoneNumber()
+                            .toString());
                     ref
                         .child('chat')
                         .child(RoomId)
