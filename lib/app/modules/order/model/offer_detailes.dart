@@ -68,14 +68,14 @@ class LawyersList {
     String idLawyer;
     String lawyerName;
     String lawyerPhone;
-    DateTime offerDate;
+    String offerDate;
     String lawyerOffer;
 
     factory LawyersList.fromJson(Map<String, dynamic> json) => LawyersList(
         idLawyer: json["id_lawyer"],
         lawyerName: json["lawyer_name"],
         lawyerPhone: json["lawyer_phone"],
-        offerDate: DateTime.parse(json["offer_date"]),
+        offerDate: json["offer_date"],
         lawyerOffer: json["lawyer_offer"],
     );
 
@@ -83,7 +83,7 @@ class LawyersList {
         "id_lawyer": idLawyer,
         "lawyer_name": lawyerName,
         "lawyer_phone": lawyerPhone,
-        "offer_date": "${offerDate.year.toString().padLeft(4, '0')}-${offerDate.month.toString().padLeft(2, '0')}-${offerDate.day.toString().padLeft(2, '0')}",
+        "offer_date": offerDate,
         "lawyer_offer": lawyerOffer,
     };
 }

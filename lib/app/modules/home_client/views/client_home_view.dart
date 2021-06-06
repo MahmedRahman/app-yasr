@@ -61,6 +61,14 @@ class HomePage extends StatelessWidget {
 
                                 return ListTile(
                                   onTap: () {
+
+print('object');
+
+print(request.requestedId);
+
+
+print('object');
+
                                     Get.toNamed(Routes.OrderDetailsView,
                                         arguments: [request.requestedId]);
                                   },

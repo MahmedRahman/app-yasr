@@ -213,7 +213,7 @@ class WebServices extends APIManger {
       'client_type': userType,
     });
 
-    ResponsModel response = await repsmsPost(
+    ResponsModel response = await repPost(
         'agents/confirm_test',
         FormData({
           'key': api_key,

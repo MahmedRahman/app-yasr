@@ -12,11 +12,13 @@ import 'package:yasr/app/data/component/CustomCheckBox.dart';
 class OrderDetailsView extends GetView<OrderController> {
   var lawerid = '';
   var requestid = Get.arguments[0];
+  var selectflg = true.obs;
+
   @override
   Widget build(BuildContext context) {
     controller.getClientOrderDetailes(requestid);
 
-    var Checkboxvalue = true.obs;
+    var Checkboxvalue = false.obs;
 
     return Scaffold(
       appBar: AppBar(
@@ -100,49 +102,51 @@ class OrderDetailsView extends GetView<OrderController> {
                                         children: [
                                           Expanded(
                                             child: ListTile(
-                                                onTap: () {
-                                                  Get.to(OrderOfferView(),
-                                                      arguments: [
-                                                        requeste
-                                                            .result
-                                                            .requestDetails
-                                                            .first
-                                                            .requestedId,
-                                                        lawyersList.idLawyer,
-                                                        requeste
-                                                            .result
-                                                            .requestDetails
-                                                            .first
-                                                            .clientPhone
-                                                      ]);
-                                                },
-                                                title: Text(
-                                                  lawyersList.lawyerName,
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color:
-                                                        AppTheme().colorPrimary,
-                                                  ),
+                                              onTap: () {
+                                                Get.to(OrderOfferView(),
+                                                    arguments: [
+                                                      requeste
+                                                          .result
+                                                          .requestDetails
+                                                          .first
+                                                          .requestedId,
+                                                      lawyersList.idLawyer,
+                                                      requeste
+                                                          .result
+                                                          .requestDetails
+                                                          .first
+                                                          .clientPhone
+                                                    ]);
+                                              },
+                                              title: Text(
+                                                lawyersList.lawyerName,
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color:
+                                                      AppTheme().colorPrimary,
                                                 ),
-                                                subtitle: Text(
-                                                  DateFormat('yyyy-MM-dd')
-                                                      .format(
-                                                          lawyersList.offerDate)
-                                                      .toString(),
-                                                  style: TextStyle(
-                                                    color:
-                                                        AppTheme().colorPrimary,
-                                                  ),
-                                                )),
+                                              ),
+                                              subtitle: Text(
+                                                lawyersList.offerDate,
+                                                style: TextStyle(
+                                                  color:
+                                                      AppTheme().colorPrimary,
+                                                ),
+                                              ),
+                                            ),
                                           ),
-                                          Checkbox(
-                                            value: Checkboxvalue.value,
-                                            onChanged: (value) {
-                                              lawerid = lawyersList.idLawyer;
+                                          IconButton(
+                                              icon: Icon(lawerid.toString() ==
+                                                      lawyersList.idLawyer.toString()
+                                                  ? Icons.done
+                                                  : Icons.cached),
+                                              onPressed: () {
 
-                                              Checkboxvalue.value = value;
-                                            },
-                                          )
+                                               print(lawerid.toString());
+                                               print(lawyersList.idLawyer.toString());
+                                                lawerid = lawyersList.idLawyer;
+                                                //Checkboxvalue.value = value;
+                                              })
                                         ],
                                       ),
                                     );
@@ -201,7 +205,9 @@ class OrderDetailsView extends GetView<OrderController> {
                   ),
                 );
               }
-
+              if (snapshot.hasError) {
+                return Center(child: Text('خطاء فى الدتا'));
+              }
               return Center(child: CircularProgressIndicator());
             });
       }),

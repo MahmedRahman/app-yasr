@@ -27,7 +27,9 @@ class APIManger extends GetConnect {
 
     Response response = await post(baes_url + url, body, headers: header);
 
-    print("Api Request ${baes_url}${url} ${response.statusCode} ");
+    
+
+    print("Api Request Post ${baes_url}${url} ${response.statusCode} ${body} ");
 
     try {
       switch (response.statusCode) {
@@ -81,7 +83,7 @@ class APIManger extends GetConnect {
       EasyLoading.show(status: 'Loading ...');
     }
 
-    print("Api Request ${baes_url}${url}");
+    print("Api Request Get ${baes_url}${url}");
 
     Response response;
     if (GetUtils.isURL(url)) {
@@ -90,7 +92,7 @@ class APIManger extends GetConnect {
       response = await get(baes_url + url, headers: header);
     }
 
-    print("Api Request ${baes_url}${url} ${response.statusCode} ");
+    print("Api Request Get ${baes_url}${url} ${response.statusCode} ${url}");
 
     try {
       switch (response.statusCode) {
@@ -139,67 +141,7 @@ class APIManger extends GetConnect {
     }
   }
 
-  Future<ResponsModel> repsmsPost(url, body, {bool showLoading = false}) async {
-   
-    if (showLoading) {
-      EasyLoading.show(status: 'Loading ...');
-    }
 
-    print("Api Request ${baes_url}${url} xx");
-
-    Response response = await post(baes_url + url, body, headers: {
-      'Content-type': 'multipart/form-data',
-      'Accept': 'application/json',
-    });
-
-    print("Api Request ${baes_url}${url} ${response.statusCode} ");
-
-    try {
-      switch (response.statusCode) {
-        case 200:
-          if (showLoading) {
-            EasyLoading.dismiss();
-          }
-          return ResponsModel(
-            code: response.statusCode,
-            success: true,
-            data: response,
-          );
-          break;
-          
-        default:
-          if (showLoading) {
-            EasyLoading.showError('Error');
-          }
-
-          Get.to(ErrorView(
-            api_url: url.toString(),
-            api_body: body.toString(),
-            api_header: header.toString(),
-            api_status_code: response.statusCode.toString(),
-          ));
-          return ResponsModel(
-            code: response.statusCode,
-            success: false,
-          );
-      }
-    } catch (e) {
-      if (showLoading) {
-        EasyLoading.showError('Error');
-      }
-
-      Get.to(ErrorView(
-        api_url: response.headers.toString(),
-        api_body: e.toString(),
-        api_header: '',
-        api_status_code: e.hashCode.toString(),
-      ));
-      return ResponsModel(
-        code: e.hashCode,
-        success: false,
-      );
-    }
-  }
 }
 
 class ErrorView extends GetView {

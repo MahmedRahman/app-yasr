@@ -45,9 +45,8 @@ class ClientSigninView extends GetView<AuthenticationController> {
                   CustomTextFormFiled(
                     inputController: controller.password,
                     inputLabel: 'كلمة السر',
-                    inputHit: 'Enter ID Number'.tr,
-                    keyboardType: TextInputType.visiblePassword,
-                    
+                    inputHit: 'كلمة السر',
+                    keyboardType: TextInputType.visiblePassword,                    
                     onValidator: (value) {
                       return AppValidation.checkEmpty(value);
                     },
@@ -58,9 +57,7 @@ class ClientSigninView extends GetView<AuthenticationController> {
                   RaisedButton(
                     onPressed: () {
                       FocusScope.of(context).requestFocus(new FocusNode());
-
                       if (_formKey.currentState.validate()) {
-                        //Get.toNamed(Routes.UserOtpView);
                         controller.signinClient();
                       }
                     },

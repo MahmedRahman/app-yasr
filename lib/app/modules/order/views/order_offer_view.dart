@@ -21,7 +21,9 @@ class OrderOfferView extends GetView {
           future:
               controller.OfferDetailes(int.parse(data[0]), int.parse(data[1])),
           builder: (context, snapshot) {
+
             if (snapshot.hasData) {
+              print(snapshot.data);
               RequestedOfferModel requestedOfferModel = snapshot.data;
               return Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -161,7 +163,7 @@ class OrderOfferView extends GetView {
               );
             }
 
-            return CircularProgressIndicator();
+            return Center(child: CircularProgressIndicator());
           }),
     );
   }

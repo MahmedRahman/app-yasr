@@ -58,7 +58,6 @@ class ClientSignupView extends GetView<AuthenticationController> {
                     return AppValidation.checkEmpty(value);
                   },
                 ),
-      
                 CustomTextFormFiled(
                   inputController: controller.address,
                   inputLabel: 'Clients address'.tr,
@@ -68,7 +67,7 @@ class ClientSignupView extends GetView<AuthenticationController> {
                     return AppValidation.checkEmpty(value);
                   },
                 ),
-                    CustomTextFormFiled(
+                CustomTextFormFiled(
                   inputController: controller.password,
                   inputLabel: 'كلمة السر',
                   inputHit: 'برجاء كتابة كلمة المرور',
@@ -94,18 +93,15 @@ class ClientSignupView extends GetView<AuthenticationController> {
                       FocusScope.of(context).requestFocus(new FocusNode());
 
                       if (_formKey.currentState.validate()) {
-
                         if (controller.termsConditionsStatus) {
-
                           controller.createClientAccount();
-                          
                         } else {
                           AppUtils().showSnackBar(
                               title: appName,
                               message: 'termsConditionsStatus',
                               onstatusBarClosed: () {});
                         }
-                      } 
+                      }
                     },
                     child: Text('Create an account'.tr),
                   ),

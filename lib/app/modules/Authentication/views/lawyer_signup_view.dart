@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yasr/app/component/custemImgePicker/CustemImagePicker.dart';
 import 'package:yasr/app/modules/Authentication/controllers/authentication_controller.dart';
 import 'package:yasr/app/routes/app_pages.dart';
 import 'package:yasr/app/data/helper/AppEnumeration.dart';
@@ -35,6 +36,7 @@ class LawyerSignupView extends GetView<AuthenticationController> {
                   return AppValidation.checkEmpty(value);
                 },
               ),
+              
               CustomTextFormFiled(
                 inputController: controller.address,
                 inputLabel: 'lawer address'.tr,
@@ -52,7 +54,7 @@ class LawyerSignupView extends GetView<AuthenticationController> {
                         .toList(),
                 labelDropdownButton: 'City'.tr,
                 onChanged: (value) {
-                   controller.cityID =value;
+                  controller.cityID = value;
                 },
               ),
               CustomTextFormFiled(
@@ -64,6 +66,7 @@ class LawyerSignupView extends GetView<AuthenticationController> {
                   return AppValidation.checkMobile(value);
                 },
               ),
+              
               CustomTextFormFiled(
                 inputController: controller.idNumber,
                 inputLabel: 'myid'.tr,
@@ -80,6 +83,12 @@ class LawyerSignupView extends GetView<AuthenticationController> {
                 keyboardType: TextInputType.visiblePassword,
                 onValidator: (value) {
                   return AppValidation.checkEmpty(value);
+                },
+              ),
+            SizedBox(height: 10,),
+              CustemImagePicker(
+                onclick: (filedata) {
+                  //controller.ImageFile = filedata;
                 },
               ),
               CustomCheckBox(

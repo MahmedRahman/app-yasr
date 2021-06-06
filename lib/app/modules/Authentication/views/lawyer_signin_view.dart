@@ -42,7 +42,7 @@ class LawyerSigninView extends GetView<AuthenticationController> {
                   CustomTextFormFiled(
                     inputController: controller.password,
                     inputLabel: 'كلمة السر',
-                    inputHit: 'Enter ID Number'.tr,
+                    inputHit: 'كلمة السر',
                     keyboardType: TextInputType.visiblePassword,
                     onValidator: (value) {
                       return AppValidation.checkEmpty(value);

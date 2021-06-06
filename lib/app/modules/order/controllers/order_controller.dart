@@ -31,6 +31,8 @@ class OrderController extends GetxController {
     ResponsModel responsModel =
         await WebServices().getClientOrderList(requestType: requestid);
 
+        print(requestid);
+
     if (responsModel.success) {
       Response response = responsModel.data;
       final requestedModel = requestedModelFromJson(response.bodyString);
@@ -94,10 +96,13 @@ var recording = await recorder.current(channel: 0);*/
 
     if (responsModel.success) {
       Response response = responsModel.data;
+      print(response.body['status']);
       if (response.body['status']) {
         final requestedOfferModel =
             requestedOfferModelFromJson(response.bodyString);
         return requestedOfferModel;
+      } else {
+        Get.snackbar(appName, response.body['message']);
       }
     }
   }
